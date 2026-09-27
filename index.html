@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>समग्र प्रगतिपत्रक (HPC) - पायाभूत स्तर (A4 बुकलेट)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+
+  /* Handwritten Blue Pen Ink Effect */
+  .handwritten-pen {
+    font-family: 'Kalam', 'Caveat', 'Segoe Print', cursive, 'Mangal', sans-serif !important;
+    color: #0029b3 !important; /* Authentic Ballpoint Blue Pen Ink */
+    font-weight: 700 !important;
+    font-size: 1.08em;
+    letter-spacing: 0.2px;
+  }
+  .tick-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    border: 1.5px solid #0029b3 !important;
+    color: #0029b3 !important;
+    font-family: 'Kalam', cursive, sans-serif !important;
+    font-size: 10.5px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .unticked-box {
+    color: #888;
+    font-size: 10px;
+    padding: 4px;
+    display: block;
+    text-align: center;
+  }
+  .goal-tick {
+    color: #0029b3;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  /* A4 Print & Page Layout */
+  @page {
+    size: A5 portrait;
+    margin: 5mm 6mm 5mm 6mm;
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Arial', 'Mangal', 'Lohit Marathi', sans-serif;
+    background-color: #fce4ec;
+    margin: 0;
+    padding: 0;
+    color: #111;
+  }
+
+  /* Navigation & Controls */
+  .top-navbar {
+    background: #1b5e20;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    background: #a5d6a7;
+    color: #1b5e20;
+  }
+
+  .btn-print {
+    background: #ffb300;
+    color: #000;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .btn-print:hover {
+    background: #ffa000;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 15px auto;
+    padding: 0 10px;
+  }
+
+  /* Card Styles */
+  .home-card, .db-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-top: 5px solid #1b5e20;
+    margin-bottom: 25px;
+  }
+
+  .hero-ad-banner {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border: 2px solid #fb8c00;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .hero-ad-banner h2 {
+    color: #e65100;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+  }
+
+  .hero-ad-banner p {
+    color: #37474f;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 600;
+    margin: 8px 0;
+  }
+
+  .udise-box {
+    background: #e8f5e9;
+    border: 2px solid #2e7d32;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .udise-input {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 250px;
+    border: 2px solid #1b5e20;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .btn-unlock {
+    background: #1b5e20;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  /* Modal Admin */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-box {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    border-top: 5px solid #d32f2f;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .admin-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .btn-sheet-app { background: #1565c0; color: white; }
+  .btn-sheet-sync { background: #2e7d32; color: white; }
+  .btn-close-admin { background: #c62828; color: white; }
+
+  /* Form Tables & Grid */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 4px;
+  }
+
+  .form-group input, .form-group select {
+    padding: 7px 9px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 13px;
+  }
+
+  .section-title {
+    background: #e8f5e9;
+    color: #1b5e20;
+    padding: 6px 10px;
+    border-left: 4px solid #1b5e20;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 8px 0;
+    grid-column: 1 / -1;
+  }
+
+  /* Attendance Table Layout in DB View */
+  table.attendance-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 12px;
+  }
+
+  table.attendance-grid th, table.attendance-grid td {
+    border: 1px solid #1b5e20;
+    padding: 5px;
+    text-align: center;
+  }
+
+  table.attendance-grid th {
+    background: #e8f5e9;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  table.attendance-grid input {
+    width: 90%;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+  }
+
+  /* A4 Page Layout Structure - VIVID BLUE SKY WITH REALISTIC WHITE FLUFFY CLOUDS */
+    .a5-page {
+    width: 148mm;
+    height: 208mm;
+    margin: 15px auto;
+    padding: 7mm 7mm 7mm 7mm;
+    border: 4px double #1b5e20;
+    outline: 2px solid #81c784;
+    outline-offset: -4px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    position: relative;
+    page-break-after: always;
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  /* Page 1 (Cover Page): Rich Vibrant Sky Gradient */
+  .a5-page.cover-page {
+    background-color: #29b6f6;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 1000' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='cloudShadow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='5' flood-color='%2300284d' flood-opacity='0.12'/%3E%3C/filter%3E%3C/defs%3E%3C!-- Fluffy White Clouds --%3E%3Cpath fill='rgba(255,255,255,0.93)' filter='url(%23cloudShadow)' d='M -20,80 Q 20,40 70,55 Q 110,20 165,45 Q 210,15 255,50 Q 295,35 320,75 Q 330,110 280,125 Q 150,130 -20,110 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M 520,60 Q 560,25 610,38 Q 655,10 705,30 Q 750,15 780,50 Q 820,40 830,80 Q 810,110 750,115 Q 630,120 520,85 Z'/%3E%3Cpath fill='rgba(255,255,255,0.85)' filter='url(%23cloudShadow)' d='M 590,260 Q 625,230 665,242 Q 695,215 735,235 Q 770,225 790,258 Q 815,278 795,305 Q 710,315 590,290 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M -30,460 Q 10,430 55,442 Q 95,415 140,435 Q 175,420 200,455 Q 225,480 195,505 Q 100,515 -30,490 Z'/%3E%3Cpath fill='rgba(255,255,255,0.82)' filter='url(%23cloudShadow)' d='M 560,620 Q 595,595 635,608 Q 670,585 710,605 Q 740,595 765,625 Q 785,650 760,670 Q 670,680 560,650 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M -10,820 Q 30,785 80,800 Q 120,765 170,788 Q 210,775 235,810 Q 260,840 230,865 Q 120,875 -10,850 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M 510,880 Q 550,850 595,862 Q 635,835 680,855 Q 715,845 740,878 Q 765,905 735,925 Q 630,935 510,905 Z'/%3E%3C!-- Flying Birds Silhouettes in Sky --%3E%3Cg fill='%230d47a1' opacity='0.45'%3E%3Cpath d='M 380,90 Q 392,72 405,90 Q 418,72 430,90 Q 418,81 405,96 Q 392,81 380,90 Z'/%3E%3Cpath d='M 440,115 Q 450,102 460,115 Q 470,102 480,115 Q 470,108 460,120 Q 450,108 440,115 Z'/%3E%3Cpath d='M 340,130 Q 348,118 358,130 Q 368,118 376,130 Q 368,124 358,134 Q 348,124 340,130 Z'/%3E%3Cpath d='M 220,380 Q 230,365 240,380 Q 250,365 260,380 Q 250,372 240,385 Q 230,372 220,380 Z'/%3E%3Cpath d='M 270,400 Q 278,388 288,400 Q 298,388 306,400 Q 298,394 288,404 Q 278,394 270,400 Z'/%3E%3Cpath d='M 480,720 Q 492,702 505,720 Q 518,702 530,720 Q 518,711 505,726 Q 492,711 480,720 Z'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(180deg, #1976d2 0%, #29b6f6 35%, #81d4fa 70%, #e0f7fa 100%);
+    background-size: cover, cover;
+  }
+
+  /* Page 2, Page 3 & Other Content Pages: Soft Light Pastel Sky Background */
+  .a5-page.soft-sky {
+    background-color: #e0f7fa;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 1000' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='cloudShadow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='5' flood-color='%2300284d' flood-opacity='0.12'/%3E%3C/filter%3E%3C/defs%3E%3C!-- Fluffy White Clouds --%3E%3Cpath fill='rgba(255,255,255,0.93)' filter='url(%23cloudShadow)' d='M -20,80 Q 20,40 70,55 Q 110,20 165,45 Q 210,15 255,50 Q 295,35 320,75 Q 330,110 280,125 Q 150,130 -20,110 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M 520,60 Q 560,25 610,38 Q 655,10 705,30 Q 750,15 780,50 Q 820,40 830,80 Q 810,110 750,115 Q 630,120 520,85 Z'/%3E%3Cpath fill='rgba(255,255,255,0.85)' filter='url(%23cloudShadow)' d='M 590,260 Q 625,230 665,242 Q 695,215 735,235 Q 770,225 790,258 Q 815,278 795,305 Q 710,315 590,290 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M -30,460 Q 10,430 55,442 Q 95,415 140,435 Q 175,420 200,455 Q 225,480 195,505 Q 100,515 -30,490 Z'/%3E%3Cpath fill='rgba(255,255,255,0.82)' filter='url(%23cloudShadow)' d='M 560,620 Q 595,595 635,608 Q 670,585 710,605 Q 740,595 765,625 Q 785,650 760,670 Q 670,680 560,650 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M -10,820 Q 30,785 80,800 Q 120,765 170,788 Q 210,775 235,810 Q 260,840 230,865 Q 120,875 -10,850 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M 510,880 Q 550,850 595,862 Q 635,835 680,855 Q 715,845 740,878 Q 765,905 735,925 Q 630,935 510,905 Z'/%3E%3C!-- Flying Birds Silhouettes in Sky --%3E%3Cg fill='%230d47a1' opacity='0.45'%3E%3Cpath d='M 380,90 Q 392,72 405,90 Q 418,72 430,90 Q 418,81 405,96 Q 392,81 380,90 Z'/%3E%3Cpath d='M 440,115 Q 450,102 460,115 Q 470,102 480,115 Q 470,108 460,120 Q 450,108 440,115 Z'/%3E%3Cpath d='M 340,130 Q 348,118 358,130 Q 368,118 376,130 Q 368,124 358,134 Q 348,124 340,130 Z'/%3E%3Cpath d='M 220,380 Q 230,365 240,380 Q 250,365 260,380 Q 250,372 240,385 Q 230,372 220,380 Z'/%3E%3Cpath d='M 270,400 Q 278,388 288,400 Q 298,388 306,400 Q 298,394 288,404 Q 278,394 270,400 Z'/%3E%3Cpath d='M 480,720 Q 492,702 505,720 Q 518,702 530,720 Q 518,711 505,726 Q 492,711 480,720 Z'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(180deg, #e0f7fa 0%, #e1f5fe 40%, #f1f8e9 80%, #ffffff 100%);
+    background-size: cover, cover;
+  }
+
+  /* Decorative Floating White Cloud Elements */
+  .a5-page::before {
+    content: "🕊️ ☁️";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .a5-page::after {
+    content: "☁️ 🕊️";
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 22px;
+    opacity: 0.40;
+    pointer-events: none;
+  }
+  
+  /* Large Square Card Tabs for Unlocked Dashboard */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .dash-card-btn {
+    background: #ffffff;
+    border: 2px solid #1b5e20;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dash-card-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(27,94,32,0.2);
+    background: #e8f5e9;
+  }
+
+  .dash-card-btn .icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .dash-card-btn .title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1b5e20;
+  }
+
+  /* Photo Frame Boxes on Cover Page */
+  .photo-frame-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 0;
+    gap: 8px;
+  }
+
+  .photo-frame-box {
+    width: 33mm;
+    height: 42mm;
+    border: 2px dashed #1b5e20;
+    border-radius: 6px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .photo-frame-box .photo-icon {
+    font-size: 20px;
+    color: #2e7d32;
+  }
+
+  .photo-frame-box .photo-label {
+    font-size: 9.5px;
+    font-weight: bold;
+    color: #1b5e20;
+    margin-top: 3px;
+  }
+
+  /* Header Box */
+  .header-box {
+    text-align: center;
+    border: 1.5px solid #1b5e20;
+    background-color: #fff3e0;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+
+  .header-box h2 {
+    margin: 0;
+    color: #1b5e20;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .header-box h3 {
+    margin: 2px 0 0 0;
+    color: #e65100;
+    font-size: 12px;
+  }
+
+  /* Curricular Goals & Outcomes Header Box */
+  .outcomes-box {
+    background: #ffffff;
+    border: 1px solid #1b5e20;
+    padding: 6px;
+    font-size: 10px;
+    line-height: 1.35;
+    margin-bottom: 6px;
+    border-radius: 3px;
+  }
+
+  .outcomes-title {
+    font-weight: bold;
+    color: #1b5e20;
+    border-bottom: 1px dashed #2e7d32;
+    padding-bottom: 2px;
+    margin-bottom: 3px;
+  }
+
+  /* Tables Fluid Height */
+  table.hpc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 6px;
+    font-size: 10.5px;
+    flex-grow: 1;
+  }
+
+  table.hpc-table th, table.hpc-table td {
+    border: 1px solid #1b5e20;
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  table.hpc-table th {
+    background-color: #ffe0b2;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  .level-col {
+    width: 28%;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .active-level-box {
+    background-color: #e8f5e9;
+    border: 1.5px solid #2e7d32 !important;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .active-badge {
+    display: inline-block;
+    background: #1b5e20;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+  }
+
+  .page-footer {
+    border-top: 1px solid #1b5e20;
+    padding-top: 3px;
+    font-size: 9.5px;
+    text-align: center;
+    color: #333;
+    margin-top: auto;
+  }
+
+  /* Block Warning Modal */
+  .block-card {
+    background: #ffebee;
+    border: 3px solid #c62828;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    margin: 30px auto;
+    max-width: 650px;
+  }
+
+  /* Print Media Query - STANDARD A4 PORTRAIT COMPATIBLE FOR ALL XEROX SHOPS & PRINTERS */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 10mm 10mm 20mm 10mm;
+    }
+    html, body {
+      width: 210mm !important;
+      background: white !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .no-print, header, nav, .top-navbar, #homeView, #dashView, #dbView, #schoolView, #blockView, .modal-overlay {
+      display: none !important;
+    }
+    #reportView, #pagesContainer {
+      display: block !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .a5-page {
+      width: 190mm !important;
+      height: 262mm !important;
+      max-height: 262mm !important;
+      margin: 0 auto !important;
+      padding: 6mm 8mm !important;
+      border: 1.5px solid #1b5e20 !important;
+      box-shadow: none !important;
+      box-sizing: border-box !important;
+      page-break-after: always !important;
+      page-break-inside: avoid !important;
+      break-after: page !important;
+      break-inside: avoid !important;
+      overflow: hidden !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .a5-page.cover-page {
+      background-color: #29b6f6 !important;
+      background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 1000' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='cloudShadow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='5' flood-color='%2300284d' flood-opacity='0.12'/%3E%3C/filter%3E%3C/defs%3E%3C!-- Fluffy White Clouds --%3E%3Cpath fill='rgba(255,255,255,0.93)' filter='url(%23cloudShadow)' d='M -20,80 Q 20,40 70,55 Q 110,20 165,45 Q 210,15 255,50 Q 295,35 320,75 Q 330,110 280,125 Q 150,130 -20,110 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M 520,60 Q 560,25 610,38 Q 655,10 705,30 Q 750,15 780,50 Q 820,40 830,80 Q 810,110 750,115 Q 630,120 520,85 Z'/%3E%3Cpath fill='rgba(255,255,255,0.85)' filter='url(%23cloudShadow)' d='M 590,260 Q 625,230 665,242 Q 695,215 735,235 Q 770,225 790,258 Q 815,278 795,305 Q 710,315 590,290 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M -30,460 Q 10,430 55,442 Q 95,415 140,435 Q 175,420 200,455 Q 225,480 195,505 Q 100,515 -30,490 Z'/%3E%3Cpath fill='rgba(255,255,255,0.82)' filter='url(%23cloudShadow)' d='M 560,620 Q 595,595 635,608 Q 670,585 710,605 Q 740,595 765,625 Q 785,650 760,670 Q 670,680 560,650 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M -10,820 Q 30,785 80,800 Q 120,765 170,788 Q 210,775 235,810 Q 260,840 230,865 Q 120,875 -10,850 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M 510,880 Q 550,850 595,862 Q 635,835 680,855 Q 715,845 740,878 Q 765,905 735,925 Q 630,935 510,905 Z'/%3E%3C!-- Flying Birds Silhouettes in Sky --%3E%3Cg fill='%230d47a1' opacity='0.45'%3E%3Cpath d='M 380,90 Q 392,72 405,90 Q 418,72 430,90 Q 418,81 405,96 Q 392,81 380,90 Z'/%3E%3Cpath d='M 440,115 Q 450,102 460,115 Q 470,102 480,115 Q 470,108 460,120 Q 450,108 440,115 Z'/%3E%3Cpath d='M 340,130 Q 348,118 358,130 Q 368,118 376,130 Q 368,124 358,134 Q 348,124 340,130 Z'/%3E%3Cpath d='M 220,380 Q 230,365 240,380 Q 250,365 260,380 Q 250,372 240,385 Q 230,372 220,380 Z'/%3E%3Cpath d='M 270,400 Q 278,388 288,400 Q 298,388 306,400 Q 298,394 288,404 Q 278,394 270,400 Z'/%3E%3Cpath d='M 480,720 Q 492,702 505,720 Q 518,702 530,720 Q 518,711 505,726 Q 492,711 480,720 Z'/%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(180deg, #1976d2 0%, #29b6f6 35%, #81d4fa 70%, #e0f7fa 100%) !important;
+      background-size: cover, cover !important;
+    }
+    .a5-page.soft-sky {
+      background-color: #e0f7fa !important;
+      background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 1000' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='cloudShadow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='5' flood-color='%2300284d' flood-opacity='0.12'/%3E%3C/filter%3E%3C/defs%3E%3C!-- Fluffy White Clouds --%3E%3Cpath fill='rgba(255,255,255,0.93)' filter='url(%23cloudShadow)' d='M -20,80 Q 20,40 70,55 Q 110,20 165,45 Q 210,15 255,50 Q 295,35 320,75 Q 330,110 280,125 Q 150,130 -20,110 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M 520,60 Q 560,25 610,38 Q 655,10 705,30 Q 750,15 780,50 Q 820,40 830,80 Q 810,110 750,115 Q 630,120 520,85 Z'/%3E%3Cpath fill='rgba(255,255,255,0.85)' filter='url(%23cloudShadow)' d='M 590,260 Q 625,230 665,242 Q 695,215 735,235 Q 770,225 790,258 Q 815,278 795,305 Q 710,315 590,290 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M -30,460 Q 10,430 55,442 Q 95,415 140,435 Q 175,420 200,455 Q 225,480 195,505 Q 100,515 -30,490 Z'/%3E%3Cpath fill='rgba(255,255,255,0.82)' filter='url(%23cloudShadow)' d='M 560,620 Q 595,595 635,608 Q 670,585 710,605 Q 740,595 765,625 Q 785,650 760,670 Q 670,680 560,650 Z'/%3E%3Cpath fill='rgba(255,255,255,0.90)' filter='url(%23cloudShadow)' d='M -10,820 Q 30,785 80,800 Q 120,765 170,788 Q 210,775 235,810 Q 260,840 230,865 Q 120,875 -10,850 Z'/%3E%3Cpath fill='rgba(255,255,255,0.87)' filter='url(%23cloudShadow)' d='M 510,880 Q 550,850 595,862 Q 635,835 680,855 Q 715,845 740,878 Q 765,905 735,925 Q 630,935 510,905 Z'/%3E%3C!-- Flying Birds Silhouettes in Sky --%3E%3Cg fill='%230d47a1' opacity='0.45'%3E%3Cpath d='M 380,90 Q 392,72 405,90 Q 418,72 430,90 Q 418,81 405,96 Q 392,81 380,90 Z'/%3E%3Cpath d='M 440,115 Q 450,102 460,115 Q 470,102 480,115 Q 470,108 460,120 Q 450,108 440,115 Z'/%3E%3Cpath d='M 340,130 Q 348,118 358,130 Q 368,118 376,130 Q 368,124 358,134 Q 348,124 340,130 Z'/%3E%3Cpath d='M 220,380 Q 230,365 240,380 Q 250,365 260,380 Q 250,372 240,385 Q 230,372 220,380 Z'/%3E%3Cpath d='M 270,400 Q 278,388 288,400 Q 298,388 306,400 Q 298,394 288,404 Q 278,394 270,400 Z'/%3E%3Cpath d='M 480,720 Q 492,702 505,720 Q 518,702 530,720 Q 518,711 505,726 Q 492,711 480,720 Z'/%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(180deg, #e0f7fa 0%, #e1f5fe 40%, #f1f8e9 80%, #ffffff 100%) !important;
+      background-size: cover, cover !important;
+    }
+  }
+</style>
+
+<!-- CODE SECURITY & AUTHORIZATION GUARD -->
+<script>
+(function checkDomainAuthorization() {
+  var proto = (window.location.protocol || '').toLowerCase();
+  var href = (window.location.href || '').toLowerCase();
+  var currentHost = (window.location.hostname || '').toLowerCase();
+
+  // Always allow local offline file opening on mobile or PC (.html file saved locally)
+  if (proto === 'file:' || proto === 'content:' || href.indexOf('file:') === 0 || href.indexOf('content:') === 0 || currentHost === '' || currentHost === 'file' || currentHost === 'content' || currentHost.indexOf('android') !== -1) {
+    return;
+  }
+
+  var allowedHosts = [
+    'yadav-hpc-app.netlify.app',
+    'netlify.app',
+    'github.io',
+    'github.app',
+    'github.com',
+    'vercel.app',
+    'pages.dev',
+    'googleusercontent.com',
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0'
+  ];
+
+  var isAllowed = allowedHosts.some(function(h) {
+    return currentHost === h || currentHost.endsWith('.' + h);
+  });
+  
+  if (!isAllowed) {
+    document.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; background:#b71c1c; color:#ffffff; z-index:999999; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px; text-align:center; font-family:sans-serif;';
+      overlay.innerHTML = `
+        <div style="background: white; color: #111; padding: 30px; border-radius: 12px; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <div style="font-size: 52px;">🛑</div>
+          <h2 style="color: #c62828; margin-top: 10px; font-size: 22px;">अनाधिकृत कॉपी / कोड सुरक्षा इशारा!</h2>
+          <p style="font-size: 15px; color: #333; line-height: 1.6;">
+            हा <strong>समग्र प्रगतिपत्रक (HPC) ॲप्लिकेशन कोड</strong> अधिकृतपणे <strong>श्री. पांडुरंग संदीपान यादव</strong> यांच्या मालकीचा आहे.
+          </p>
+          <div style="background: #ffebee; border: 2px dashed #ef5350; padding: 18px; border-radius: 8px; margin: 15px 0;">
+            <p style="margin: 0; font-weight: bold; color: #b71c1c; font-size: 16px;">
+              या ॲप्लिकेशनचा अधिकृत वापर करण्यासाठी किंवा स्वतःच्या शाळेसाठी कोड मिळवण्यासाठी खालील क्रमांकावर संपर्क साधा:
+            </p>
+            <hr style="border: 0.5px solid #ef5350; margin: 12px 0;">
+            <p style="margin: 5px 0; font-size: 18px; color: #1b5e20; font-weight: bold;">
+              👨‍🏫 श्री. पांडुरंग संदीपान यादव
+            </p>
+            <p style="margin: 0; font-size: 20px; color: #0d47a1; font-weight: bold;">
+              📞 मोबाईल: 9422974772
+            </p>
+          </div>
+          <p style="font-size: 12.5px; color: #666; margin-bottom: 0;">
+            इतर कोणत्याही ऑनलाईन प्लॅटफॉर्मवर हा कोड कॉपी करून चालवण्यास मनाई आहे.
+          </p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    });
+  }
+})();
+</script>
+
+
+  <meta name="theme-color" content="#1b5e20">
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22HPC%20%E0%A4%B8%E0%A4%AE%E0%A4%97%E0%A5%8D%E0%A4%B0%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%97%E0%A4%A4%E0%A4%BF%E0%A4%AA%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%95%22%2C%22short_name%22%3A%22HPC%20A4%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231b5e20%22%2C%22theme_color%22%3A%22%231b5e20%22%7D">
+
+
+<!-- ANTI-COPY & RIGHT-CLICK PROTECTION GUARD -->
+<script>
+(function enableAntiCopyProtection() {
+  // 1. Disable Right Click (Context Menu)
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 2. Disable Keyboard Shortcuts (F12, Ctrl+U, Ctrl+S, Ctrl+C, Ctrl+Shift+I/J/C)
+  document.addEventListener('keydown', function(e) {
+    var isInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT';
+    
+    // F12 key
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      return false;
+    }
+    
+    if (e.ctrlKey || e.metaKey) {
+      var key = String.fromCharCode(e.keyCode).toLowerCase();
+      // Ctrl+U (View Source), Ctrl+S (Save), Ctrl+Shift+I/J/C (Dev Tools)
+      if (key === 'u' || key === 's' || (e.shiftKey && (key === 'i' || key === 'j' || key === 'c'))) {
+        e.preventDefault();
+        return false;
+      }
+      // Ctrl+C (Copy) or Ctrl+A (Select All) outside input fields
+      if (!isInput && (key === 'c' || key === 'a')) {
+        e.preventDefault();
+        return false;
+      }
+    }
+  });
+})();
+</script>
+
+</head>
+<body>
+
+  <!-- Top App Navigation Navbar (Initially Hidden until UDISE unlock) -->
+  <div id="appNavbar" class="top-navbar no-print" style="display: none;">
+    <div class="nav-tabs">
+      <button class="tab-btn" onclick="switchTab('dashView', this)">🎛️ मुख्य डॅशबोर्ड</button>
+      <button class="tab-btn" onclick="switchTab('schoolView', this)">🏫 शाळा माहिती</button>
+      <button class="tab-btn" onclick="switchTab('dbView', this)">📊 विद्यार्थी डेटाबेस</button>
+      <button class="tab-btn" onclick="switchTab('reportView', this)">📄 A4 PDF प्रिंट (16 Pages)</button>
+      <button class="tab-btn" onclick="showHomeView()" style="background: #ff8f00;">🏠 होम पेज</button>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <select id="studentSelect" onchange="onStudentChange()" style="padding: 5px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; color: #111;">
+      </select>
+      <button class="btn-print" onclick="triggerA4PdfPrint()" style="padding: 6px 12px; font-size: 12px;">🖨️ A4 PDF प्रिंट घ्या</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- DASHBOARD CARD VIEW (Shown after UDISE unlock) -->
+    <div id="dashView" class="home-card no-print" style="display: none;">
+      <div style="text-align: center; border-bottom: 2px solid #1b5e20; padding-bottom: 10px; margin-bottom: 15px;">
+        <h2 style="color: #1b5e20; margin: 0;">🏫 मुख्य ॲप्लिकेशन डॅशबोर्ड</h2>
+        <p style="margin: 5px 0 0 0; font-size: 13px; color: #555;" id="dashSchoolTitle">शाळेचे नाव लोड होत आहे...</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dash-card-btn" onclick="switchTab('schoolView')">
+          <span class="icon">🏫</span>
+          <div class="title">शाळा व वर्गशिक्षक माहिती</div>
+          <p style="font-size: 11px; color: #666; margin: 5px 0 0 0;">शाळेचे नाव, पत्ता व ६-१० शिक्षकांचे नाव मॅपिंग</p>
+        </div>
+
+        <div class="dash-card-btn" onclick="switchTab('dbView')">
+          <span class="icon">📊</span>
+          <div class="title">विद्यार्थी डेटाबेस व नोंदणी</div>
+          <p style="font-size: 11px; color: #666; margin: 5px 0 0 0;">विद्यार्थी माहिती, हजेरी, वाढ व ३६०° शेरे भरण्यासाठी</p>
+        </div>
+
+        <div class="dash-card-btn" onclick="switchTab('reportView')">
+          <span class="icon">📄</span>
+          <div class="title">A4 PDF प्रिंट (16 Pages HPC)</div>
+          <p style="font-size: 11px; color: #666; margin: 5px 0 0 0;">विद्यार्थी निवडून १६ पानांचे प्रगतिपत्रक प्रिंट करा</p>
+        </div>
+
+        <div class="dash-card-btn" onclick="showHomeView()" style="border-color: #ff8f00;">
+          <span class="icon">🏠</span>
+          <div class="title" style="color: #e65100;">होम पेज (जाहिरात व लॉक)</div>
+          <p style="font-size: 11px; color: #666; margin: 5px 0 0 0;">मुख्य जाहिरात पेज व यु-डायस लॉकरवर जा</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. HOME VIEW (JAHIRAT & UDISE UNLOCK LOCKER) -->
+    <div id="homeView" class="home-card no-print">
+      <div class="hero-ad-banner">
+        <h2>✨ यादव सरांचे एचपीसी कार्ड ऑटोमेशन ॲप्लिकेशन ✨</h2>
+        <p><strong>प्रधानमंत्री पोषण शक्ती निर्माण योजना ॲप्लिकेशन निर्माते स्मार्ट वर्क.</strong></p>
+        <p>कमी वेळात विना गुंतागुंतीचे. अत्यल्प किमतीत पटाची मर्यादा नाही शाळेनुसार वर्गणी.</p>
+        <div style="margin-top: 12px; font-size: 15px; color: #1b5e20; font-weight: bold;">
+          👨‍🏫 निर्माते: यादव सर | 📞 संपर्क मो.: 9422974772
+        </div>
+      </div>
+
+      <div class="udise-box">
+        <h3 style="color: #1b5e20; margin-top: 0;">🔐 अधिकृत शाळा यु-डायस (U-DISE) कोड टाकून प्रवेश करा</h3>
+        <p style="font-size: 13px; color: #555;">कृपया तुमच्या शाळेचा ११ अंकी यु-डायस कोड टाका व 'शोधा व ॲप्लिकेशन उघडा' वर क्लिक करा.</p>
+        
+        <input type="text" id="homeUdiseInput" class="udise-input" placeholder="उदा. 27310100101" maxlength="15">
+        <button class="btn-unlock" onclick="verifyAndUnlockApp()">🔍 शोधा व ॲप्लिकेशन उघडा</button>
+        <div id="homeUdiseStatus" style="margin-top: 8px; font-weight: bold; font-size: 14px;"></div>
+      </div>
+
+      <div style="text-align: center; margin-top: 25px;">
+        <button onclick="openAdminModal()" style="background: #37474f; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 6px; cursor: pointer;">
+          🔐 ॲडमिन पॅनेल (Admin Controls)
+        </button>
+      </div>
+    </div>
+
+    <!-- ADMIN MODAL -->
+    <div id="adminModal" class="modal-overlay">
+      <div class="modal-box">
+        <h3 style="color: #d32f2f; margin-top: 0;">🔐 ॲडमिन पॅनेल लॉगिन</h3>
+        <div id="adminPassBox">
+          <label style="font-weight: bold;">पासवर्ड टाका:</label>
+          <input type="password" id="adminPassInput" style="padding: 8px; font-size: 14px; width: 100%; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;">
+          <button onclick="checkAdminPassword()" style="background: #d32f2f; color: white; border: none; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer;">लॉगिन करा</button>
+          <button onclick="closeAdminModal()" style="background: #757575; color: white; border: none; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-left: 5px;">रद्द करा</button>
+          <div id="adminPassError" style="color: red; font-size: 12px; margin-top: 5px;"></div>
+        </div>
+
+        <div id="adminControlsBox" style="display: none;">
+          <h4 style="color: #2e7d32; margin-bottom: 5px;">✅ ॲडमिन कंट्रोल्स</h4>
+          <button class="admin-btn btn-sheet-app" onclick="openGoogleSheetApp()">
+            ✏️ १. गुगल शीट उघडा (Google Sheets App)
+          </button>
+          <button class="admin-btn btn-sheet-sync" onclick="syncGoogleSheetDatabase()">
+            🔄 २. गुगल शीटवरून शाळा डेटाबेस सिंक करा
+          </button>
+          <div id="syncStatus" style="font-size: 13px; margin: 8px 0; font-weight: bold;"></div>
+
+          <div style="border-top: 1px solid #ccc; margin-top: 12px; padding-top: 10px;">
+            <h5 style="margin: 0 0 8px 0; color: #1b5e20;">➕ मॅन्युअल शाळा जोडा / डिलीट करा:</h5>
+            <input type="text" id="manualUdise" placeholder="यु-डायस कोड" style="padding: 6px; font-size: 12px; width: 110px;">
+            <input type="text" id="manualName" placeholder="शाळेचे नाव व पत्ता" style="padding: 6px; font-size: 12px; width: 180px;">
+            <input type="number" id="manualLimit" placeholder="पट (उदा. 50)" value="50" style="padding: 6px; font-size: 12px; width: 80px;">
+            <button onclick="addManualSchool()" style="background: #2e7d32; color: white; border: none; padding: 6px 10px; font-weight: bold; border-radius: 4px; cursor: pointer;">जोडा</button>
+          </div>
+
+          <div style="margin-top: 15px;">
+            <h5 style="margin: 0 0 5px 0; color: #37474f;">📋 नोंदणीकृत शाळांची यादी:</h5>
+            <div id="registeredSchoolsTableList" style="max-height: 180px; overflow-y: auto; border: 1px solid #ccc; padding: 5px; font-size: 12px; background: #fafafa;"></div>
+          </div>
+
+          <button class="admin-btn btn-close-admin" onclick="closeAdminModal()" style="margin-top: 15px;">
+            ✖️ क्लोज / बंद करा (होम पेजवर जा)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCK WARNING VIEW -->
+    <div id="blockView" class="no-print" style="display: none;">
+      <div class="block-card">
+        <h2 style="color: #c62828; margin-top: 0;">🛑 अनधिकृत शाळा / प्रवेश बंद! 🛑</h2>
+        <p style="font-size: 16px; font-weight: bold; color: #37474f;">
+          आपली शाळा नोंदणीकृत नसल्यामुळे ॲप्लिकेशन नोंदी ब्लॉक करण्यात आलेल्या आहेत!
+        </p>
+        <p style="font-size: 14px; color: #555;">
+          अधिकृत नोंदणी, परमिशन आणि वर्गणीसाठी संपर्क साधा: <br>
+          <strong>यादव सर | मोबाईल: 9422974772</strong>
+        </p>
+        <button onclick="showHomeView()" style="background: #1b5e20; color: white; border: none; padding: 10px 20px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 15px;">
+          ⬅️ मागे जा (होम पेजवर या)
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. STUDENT DATABASE TAB -->
+    <div id="dbView" class="db-card no-print" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+        <h3 style="color: #1b5e20; margin: 0;">📊 विद्यार्थी माहिती, हजेरी व ३६०° नोंदणी फॉर्म</h3>
+        <div id="dbStudentCountBadge" style="font-weight: bold; font-size: 14px; background: #e8f5e9; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #2e7d32;">📊 पट मर्यादा लोड होत आहे...</div>
+      </div>
+      
+      <!-- Student Selection & Database Actions Header -->
+      <div style="background: #e8f5e9; border: 1.5px solid #2e7d32; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <label style="font-weight: bold; color: #1b5e20; font-size: 13.5px;">👤 विद्यार्थी निवडा (फॉर्म भरण्यासाठी / पाहण्यासाठी):</label>
+            <select id="dbStudentSelect" onchange="onDbStudentChange()" style="padding: 7px 12px; border: 1.5px solid #1b5e20; border-radius: 5px; font-weight: bold; font-size: 13.5px; background: white; min-width: 260px;">
+            </select>
+          </div>
+          
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button onclick="saveCurrentStudentData()" style="background: #2e7d32; color: white; border: none; padding: 8px 14px; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 13px;">
+              💾 माहिती सेव्ह करा
+            </button>
+            <button onclick="addNewBlankStudent()" style="background: #0288d1; color: white; border: none; padding: 8px 14px; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 13px;">
+              ➕ नवीन विद्यार्थी जोडा
+            </button>
+            <button id="dbDeleteBtn" onclick="deleteCurrentStudent()" style="background: #c62828; color: white; border: none; padding: 8px 14px; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 13px;">
+              🗑️ विद्यार्थी हटवा
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="section-title">१. वैयक्तिक माहिती (Personal Information)</div>
+        <div class="form-group"><label>हजेरी क्र. (Roll No):</label><input type="number" id="db_roll"></div>
+        <div class="form-group"><label>विद्यार्थ्याचे नाव:</label><input type="text" id="db_name"></div>
+        <div class="form-group"><label>वडिलांचे नाव:</label><input type="text" id="db_father"></div>
+        <div class="form-group"><label>आईचे नाव:</label><input type="text" id="db_mother"></div>
+        <div class="form-group"><label>लिंग:</label>
+          <select id="db_gender" onchange="onGenderChangeInForm()">
+            <option value="boy">मुलगा (Boy)</option>
+            <option value="girl">मुलगी (Girl)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>इयत्ता:</label>
+          <select id="db_class" onchange="onClassChangeInForm()">
+            <option value="इयत्ता पहिली">इयत्ता पहिली</option>
+            <option value="इयत्ता दुसरी">इयत्ता दुसरी</option>
+            <option value="इयत्ता तिसरी">इयत्ता तिसरी</option>
+            <option value="इयत्ता चौथी">इयत्ता चौथी</option>
+            <option value="इयत्ता पाचवी">इयत्ता पाचवी</option>
+            <option value="बालवाटिका/KG">बालवाटिका/KG</option>
+          </select>
+          <div id="db_teacher_indicator" style="font-size: 11px; color: #1b5e20; font-weight: bold; margin-top: 4px;"></div>
+        </div>
+        <div class="form-group"><label>दाखल क्र. (GR No):</label><input type="text" id="db_gr"></div>
+        <div class="form-group"><label>जन्म तारीख:</label><input type="text" id="db_dob"></div>
+        <div class="form-group"><label>आधार क्र.:</label><input type="text" id="db_aadhaar"></div>
+
+        <div class="section-title">१.१ मी आणि माझा परिसर / आवडीनिवडी (पान २ माहिती)</div>
+        <div class="form-group"><label>आवडते छंद (स्वल्पविरामाने द्या):</label><input type="text" id="db_hobbies" placeholder="उदा. चित्रकला, खेळ, वाचन"></div>
+        <div class="form-group"><label>आवडता रंग:</label><input type="text" id="db_favColor" placeholder="उदा. गुलाबी, निळा"></div>
+        <div class="form-group"><label>आवडते फूल:</label><input type="text" id="db_favFlower" placeholder="उदा. कमळ, चाफा"></div>
+        <div class="form-group"><label>आवडते अन्न/खाद्य:</label><input type="text" id="db_favFood" placeholder="उदा. पोळी-भाजी, पिझ्झा"></div>
+        <div class="form-group"><label>आवडता खेळ:</label><input type="text" id="db_favSport" placeholder="उदा. क्रिकेट, लंगडी"></div>
+        <div class="form-group"><label>आवडता प्राणी/पक्षी:</label><input type="text" id="db_favAnimal" placeholder="उदा. मोर, वाघ, हत्ती"></div>
+        <div class="form-group"><label>आवडता विषय:</label><input type="text" id="db_favSubject" placeholder="उदा. मराठी, गणित"></div>
+        <div class="form-group"><label>ध्येय (स्वप्न):</label><input type="text" id="db_aim" placeholder="उदा. शिक्षक, डॉक्टर, इंजिनिअर"></div>
+        <div class="form-group" style="grid-column: 1 / -1;"><label>मित्र / मैत्रिणी (नावे):</label><input type="text" id="db_friends" placeholder="उदा. शिवरुद्र, हर्षद, वीरांश"></div>
+
+
+        <div class="section-title">२. महिन्यानिहाय हजेरी अहवाल (Monthly Attendance Table - Grid Layout)</div>
+        <div style="grid-column: 1 / -1; overflow-x: auto;">
+          <table class="attendance-grid">
+            <thead>
+              <tr style="background: #1b5e20; color: white; font-weight: bold;">
+                <th rowspan="2" style="background: #1b5e20; color: white; vertical-align: middle;">तपशील</th>
+                <th colspan="5" style="background: #2e7d32; color: white; font-size: 13px; border: 1px solid white; padding: 6px;">🗓️ प्रथम सत्र (Term 1)</th>
+                <th colspan="5" style="background: #1565c0; color: white; font-size: 13px; border: 1px solid white; padding: 6px;">🗓️ द्वितीय सत्र (Term 2)</th>
+              </tr>
+              <tr style="background: #e8f5e9; color: #1b5e20; font-weight: bold;">
+                <th>जून</th>
+                <th>जुलै</th>
+                <th>ऑगस्ट</th>
+                <th>सप्टेंबर</th>
+                <th>ऑक्टोबर</th>
+                <th>नोव्हेंबर/डिसेंबर</th>
+                <th>जानेवारी</th>
+                <th>फेब्रुवारी</th>
+                <th>मार्च</th>
+                <th>एप्रिल/मे</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: bold; background: #fff3e0;">कामकाजाचे दिवस</td>
+                <td><input type="number" id="att_w_jun" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_jul" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_aug" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_sep" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_oct" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_dec" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_jan" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_feb" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_mar" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_w_apr" oninput="calcAttendance()"></td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold; background: #fff3e0;">उपस्थित दिवस</td>
+                <td><input type="number" id="att_p_jun" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_jul" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_aug" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_sep" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_oct" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_dec" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_jan" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_feb" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_mar" oninput="calcAttendance()"></td>
+                <td><input type="number" id="att_p_apr" oninput="calcAttendance()"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-title">३. शारीरिक प्रगती (Physical Growth)</div>
+        <div class="form-group"><label>उंची सत्र १ (cm):</label><input type="number" id="db_h1"></div>
+        <div class="form-group"><label>उंची सत्र २ (cm):</label><input type="number" id="db_h2"></div>
+        <div class="form-group"><label>वजन सत्र १ (kg):</label><input type="number" id="db_w1"></div>
+        <div class="form-group"><label>वजन सत्र २ (kg):</label><input type="number" id="db_w2"></div>
+
+        <div class="section-title">४. १२ क्षेत्रांचे स्वतंत्र उपक्रम, प्रगती स्तर व ३६०° बहुआयामी अभिप्राय (Per-Domain Independent Form)</div>
+        <div style="grid-column: 1 / -1; background: #f1f8e9; border: 2px solid #2e7d32; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+          <label style="font-weight: bold; color: #1b5e20; font-size: 14px;">🎯 मूल्यमापन करण्यासाठी क्षेत्र व पान निवडा:</label>
+          <select id="db_domain_selector" onchange="onDomainChangeInForm()" style="width: 100%; padding: 8px 12px; border: 2px solid #1b5e20; border-radius: 6px; font-weight: bold; font-size: 13.5px; background: #ffffff; color: #1b5e20; margin-top: 5px; cursor: pointer;">
+            <option value="d1_t1">पान ३: क्षेत्र १ - शारीरिक आणि आरोग्य विकास (प्रथम सत्र)</option>
+            <option value="d1_t2">पान ४: क्षेत्र १ - शारीरिक आणि आरोग्य विकास (द्वितीय सत्र)</option>
+            <option value="d2_t1">पान ५: क्षेत्र २ - सामाजिक, भावनिक व नैतिक विकास (प्रथम सत्र)</option>
+            <option value="d2_t2">पान ६: क्षेत्र २ - सामाजिक, भावनिक व नैतिक विकास (द्वितीय सत्र)</option>
+            <option value="d3_t1">पान ७: क्षेत्र ३ - बोधात्मक (ज्ञानात्मक) विकास (प्रथम सत्र)</option>
+            <option value="d3_t2">पान ८: क्षेत्र ३ - बोधात्मक (ज्ञानात्मक) विकास (द्वितीय सत्र)</option>
+            <option value="d4_t1">पान ९: क्षेत्र ४ - भाषा आणि साक्षरता विकास (प्रथम सत्र)</option>
+            <option value="d4_t2">पान १०: क्षेत्र ४ - भाषा आणि साक्षरता विकास (द्वितीय सत्र)</option>
+            <option value="d5_t1">पान ११: क्षेत्र ५ - सौंदर्यदृष्टी आणि सांस्कृतिक विकास (प्रथम सत्र)</option>
+            <option value="d5_t2">पान १२: क्षेत्र ५ - सौंदर्यदृष्टी आणि सांस्कृतिक विकास (द्वितीय सत्र)</option>
+            <option value="d6_t1">पान १३: क्षेत्र ६ - सकारात्मक अध्ययन सवयी (प्रथम सत्र)</option>
+            <option value="d6_t2">पान १४: क्षेत्र ६ - सकारात्मक अध्ययन सवयी (द्वितीय सत्र)</option>
+          </select>
+        </div>
+
+        <div id="activeDomainCard" style="grid-column: 1 / -1; background: #ffffff; border: 1.5px solid #2e7d32; border-radius: 8px; padding: 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+          <div style="grid-column: 1 / -1; font-weight: bold; color: #e65100; border-bottom: 1px solid #c8e6c9; padding-bottom: 4px;" id="activeDomainCardTitle">
+            📌 निवडलेले क्षेत्र माहिती लोड होत आहे...
+          </div>
+          
+          <div class="form-group" style="grid-column: 1 / -1; background:#f9fbe7; padding:10px; border-radius:6px; border:1px solid #c0ca33;">
+            <label style="color:#33691e; font-weight:bold;">१. जाणीव जागृती स्तर व वर्णन शेरा:</label>
+            <div style="display:grid; grid-template-columns: 1fr 2fr; gap:8px; margin-top:4px;">
+              <select id="db_dom_lvl_a1" onchange="updateLevelRemarkDropdown('a1')">
+                <option value="निर्झर/प्रवाह">निर्झर / प्रवाह (Beginning)</option>
+                <option value="पर्वत" selected>पर्वत (Developing)</option>
+                <option value="आकाश">आकाश (Advanced)</option>
+              </select>
+              <select id="db_dom_rem_a1_sel" onchange="toggleCustomLevelRemarkInput('a1')"></select>
+            </div>
+            <input type="text" id="db_dom_rem_a1_custom" placeholder="✍️ येथे स्वतःचा मसुदा टाईप करा..." oninput="saveActiveDomainData()" style="display:none; margin-top:5px; width:100%;">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1; background:#f9fbe7; padding:10px; border-radius:6px; border:1px solid #c0ca33;">
+            <label style="color:#33691e; font-weight:bold;">२. संवेदनशीलता स्तर व वर्णन शेरा:</label>
+            <div style="display:grid; grid-template-columns: 1fr 2fr; gap:8px; margin-top:4px;">
+              <select id="db_dom_lvl_a2" onchange="updateLevelRemarkDropdown('a2')">
+                <option value="निर्झर/प्रवाह">निर्झर / प्रवाह (Beginning)</option>
+                <option value="पर्वत" selected>पर्वत (Developing)</option>
+                <option value="आकाश">आकाश (Advanced)</option>
+              </select>
+              <select id="db_dom_rem_a2_sel" onchange="toggleCustomLevelRemarkInput('a2')"></select>
+            </div>
+            <input type="text" id="db_dom_rem_a2_custom" placeholder="✍️ येथे स्वतःचा मसुदा टाईप करा..." oninput="saveActiveDomainData()" style="display:none; margin-top:5px; width:100%;">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1; background:#f9fbe7; padding:10px; border-radius:6px; border:1px solid #c0ca33;">
+            <label style="color:#33691e; font-weight:bold;">३. सर्जनशीलता व कल्पकता स्तर व वर्णन शेरा:</label>
+            <div style="display:grid; grid-template-columns: 1fr 2fr; gap:8px; margin-top:4px;">
+              <select id="db_dom_lvl_a3" onchange="updateLevelRemarkDropdown('a3')">
+                <option value="निर्झर/प्रवाह">निर्झर / प्रवाह (Beginning)</option>
+                <option value="पर्वत" selected>पर्वत (Developing)</option>
+                <option value="आकाश">आकाश (Advanced)</option>
+              </select>
+              <select id="db_dom_rem_a3_sel" onchange="toggleCustomLevelRemarkInput('a3')"></select>
+            </div>
+            <input type="text" id="db_dom_rem_a3_custom" placeholder="✍️ येथे स्वतःचा मसुदा टाईप करा..." oninput="saveActiveDomainData()" style="display:none; margin-top:5px; width:100%;">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label style="color:#1b5e20; font-weight:bold;">🎯 या क्षेत्रातील उपक्रम / कृती:</label>
+            <select id="db_dom_act_sel" onchange="checkDomainCustomOption('act')"></select>
+            <input type="text" id="db_dom_act_custom" placeholder="स्वतःचा उपक्रम टाईप करा..." style="display:none; margin-top:4px;" oninput="saveActiveDomainData()">
+          </div>
+
+          <div class="form-group">
+            <label style="color:#1b5e20; font-weight:bold;">💬 स्वयं-मूल्यमापन:</label>
+            <select id="db_dom_self_sel" onchange="checkDomainCustomOption('self')"></select>
+            <input type="text" id="db_dom_self_custom" placeholder="स्वतःचे मत टाईप करा..." style="display:none; margin-top:4px;" oninput="saveActiveDomainData()">
+          </div>
+
+          <div class="form-group">
+            <label style="color:#1b5e20; font-weight:bold;">💬 वर्गमित्राचे / सहकाऱ्याचे मत:</label>
+            <select id="db_dom_peer_sel" onchange="checkDomainCustomOption('peer')"></select>
+            <input type="text" id="db_dom_peer_custom" placeholder="मित्राचे मत टाईप करा..." style="display:none; margin-top:4px;" oninput="saveActiveDomainData()">
+          </div>
+
+          <div class="form-group">
+            <label style="color:#1b5e20; font-weight:bold;">💬 पालकांचे मत:</label>
+            <select id="db_dom_parent_sel" onchange="checkDomainCustomOption('parent')"></select>
+            <input type="text" id="db_dom_parent_custom" placeholder="पालकांचे मत टाईप करा..." style="display:none; margin-top:4px;" oninput="saveActiveDomainData()">
+          </div>
+
+          <div class="form-group">
+            <label style="color:#1b5e20; font-weight:bold;">💬 शिक्षकाचा शेरा:</label>
+            <select id="db_dom_teacher_sel" onchange="checkDomainCustomOption('teacher')"></select>
+            <input type="text" id="db_dom_teacher_custom" placeholder="शिक्षकाचा शेरा टाईप करा..." style="display:none; margin-top:4px;" oninput="saveActiveDomainData()">
+          </div>
+        </div>
+
+        <div class="section-title">५. ३६०° अभिप्राय व मते (Remarks Dropdowns)</div>
+        <div class="form-group"><label>स्वयं-मूल्यमापन (सत्र १):</label><select id="db_self1" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>स्वयं-मूल्यमापन (सत्र २):</label><select id="db_self2" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>वर्गमित्रांचे मत (सत्र १):</label><select id="db_peer1" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>वर्गमित्रांचे मत (सत्र २):</label><select id="db_peer2" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>पालकांचे मत (सत्र १):</label><select id="db_parent1" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>पालकांचे मत (सत्र २):</label><select id="db_parent2" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>शिक्षकांचा शेरा (सत्र १):</label><select id="db_teacher1" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group"><label>शिक्षकांचा शेरा (सत्र २):</label><select id="db_teacher2" onchange="checkCustomOption(this)"></select></div>
+        <div class="form-group" style="grid-column: 1 / -1;"><label>अंतिम वार्षिक मूल्यमापन शेरा:</label><select id="db_finalEval" onchange="checkCustomOption(this)"></select></div>
+      </div>
+    </div>
+
+    <!-- 3. SCHOOL & TEACHER SETTINGS TAB -->
+    <div id="schoolView" class="db-card no-print" style="display: none;">
+      <h3 style="color: #e65100; margin-top: 0;">🏫 शाळा व इयत्तानिहाय वर्गशिक्षक माहिती (School Info)</h3>
+      <div class="form-grid">
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>शाळेचे पूर्ण नाव (गुगल शीट किंवा मॅन्युअल सिंकनुसार):</label>
+          <input type="text" id="sch_name" readonly style="background:#e0e0e0; cursor:not-allowed;">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>शाळेचा पत्ता व केंद्र/तालुका/जिल्हा:</label>
+          <input type="text" id="sch_address" oninput="saveSchoolSettings()">
+        </div>
+
+        <div class="form-group" style="grid-column: 1 / -1; background: #f1f8e9; border: 2px dashed #2e7d32; padding: 12px; border-radius: 8px; margin-top: 10px;">
+          <label style="font-size: 13.5px; font-weight: bold; color: #1b5e20;">📸 मुख्य कव्हर पानासाठी शाळेचा फोटो अपलोड करा (Upload School Photo):</label>
+          <div style="display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap;">
+            <input type="file" id="sch_photo_input" accept="image/*" onchange="uploadSchoolPhoto(event)" style="padding: 6px; border: 1px solid #2e7d32; border-radius: 5px; background: white;">
+            <div id="sch_photo_preview" style="display: inline-block;"></div>
+          </div>
+        </div>
+
+        <div class="section-title">इयत्तानिहाय वर्गशिक्षक व शालार्थ आयडी मॅपिंग (६ ते १० शिक्षक)</div>
+        <div id="teacherMappingGrid" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px;"></div>
+      </div>
+      <button class="btn-unlock" onclick="saveSchoolSettings()" style="margin-top: 15px; background: #2e7d32;">💾 शाळा माहिती सेव्ह करा</button>
+    </div>
+
+    <!-- 4. REPORT CARD VIEW (16 A5 PAGES) -->
+    <div id="reportView" style="display: none;">
+      <!-- REPORT CARD ACTION BAR (NON-PRINTABLE) -->
+      <div class="no-print" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 2.5px solid #1b5e20; border-radius: 12px; padding: 16px; margin-bottom: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.12);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <label style="font-weight: bold; color: #1b5e20; font-size: 14.5px;">👤 विद्यार्थी निवडा (HPC कार्ड पाहण्यासाठी):</label>
+            <select id="reportStudentSelect" onchange="onReportStudentChange()" style="padding: 8px 14px; border: 2px solid #1b5e20; border-radius: 6px; font-weight: bold; font-size: 14px; background: white; min-width: 260px; cursor: pointer;">
+            </select>
+          </div>
+
+          <div>
+            <button class="btn-print" onclick="triggerA4PdfPrint()" style="font-size: 15px; padding: 11px 24px; background: #ffb300; color: #000; border: 2px solid #ff8f00; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.25);">
+              🖨️ १ ते १६ पानांची A4 PDF प्रिंट घ्या / डाउनलोड करा
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; background: #ffffff; padding: 12px 16px; border-radius: 8px; border-left: 5px solid #1b5e20; font-size: 13px; color: #263238; line-height: 1.6; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+          <strong style="color: #1b5e20; font-size: 13.5px;">📲 मोबाईल किंवा कॉम्प्युटरवर PDF डाऊनलोड / सेव्ह करण्याची सोपी पद्धत:</strong><br>
+          १. वरील पिवळ्या <strong>'🖨️ १ ते १६ पानांची A4 PDF प्रिंट घ्या'</strong> बटणावर क्लिक करा.<br>
+          २. स्क्रीनवर प्रिंट विंडो उघडल्यावर Printer च्या जागी <strong>'Save as PDF' (पीडीएफ म्हणून सेव्ह करा)</strong> पर्याय निवडा.<br>
+          ३. कागदाचा आकार (Paper Size) <strong>'A4'</strong> व ओरिएंटेशन <strong>'Portrait'</strong> ठेवून <strong>Save/Download</strong> करा!
+        </div>
+      </div>
+
+      <!-- 16 A5 PAGES CONTAINER -->
+      <div id="pagesContainer"></div>
+    </div>
+
+  </div>
+
+<script>
+// Registered Schools Database (Default & Synced from Google Sheet)
+var registeredSchools = {
+  "27310710206": "जि. प. प्राथमिक शाळा मुरूम शेंडा",
+  "27310100101": "जि. प. प्राथमिक शाळा महाबळेश्वर"
+};
+var registeredSchoolAddresses = {
+  "27310710206": "ता. मान, जि. सातारा",
+  "27310100101": "मु. पो. महाबळेश्वर, ता. महाबळेश्वर, जि. सातारा"
+};
+
+var registeredSchoolLimits = {
+  "27310710206": 50,
+  "27310100101": 50
+};
+var activeSchoolUdise = "27310710206";
+var isDemoLocked = true;
+var activeSchoolLimit = 50;
+
+// School & Teacher Settings
+var schoolSettings = {
+  name: "जि. प. प्राथमिक शाळा मुरूम शेंडा",
+  address: "ता. मान, जि. सातारा",
+  teachers: [
+    { cls: "इयत्ता पहिली", name: "श्रीमती सुप्रिया विकास पाटील", shalarth: "TCH1001" },
+    { cls: "इयत्ता दुसरी", name: "श्री. अमित प्रकाश शिंदे", shalarth: "TCH1002" },
+    { cls: "इयत्ता तिसरी", name: "श्री. विकास रामराव यादव", shalarth: "TCH1003" },
+    { cls: "इयत्ता चौथी", name: "श्रीमती अंजली सुरेश कदम", shalarth: "TCH1004" },
+    { cls: "इयत्ता पाचवी", name: "श्री. महेश आनंदा पवार", shalarth: "TCH1005" },
+    { cls: "बालवाटिका/KG", name: "श्रीमती रोहिणी राहुल माने", shalarth: "TCH1006" }
+  ]
+};
+
+// Remarks Dropdown Option Banks
+var remarkBanksBoy = {
+  self: ["मी शाळेत खेळायला येतो.", "मला शाळेत यायला आणि शिकायला खूप आवडते.", "मी मित्रांशी छान गप्पा मारतो.", "मी रोज वेळेवर शाळेत येतो."],
+  peer: ["आम्ही याला खेळायला बोलावतो.", "हा खूप छान खेळतो आणि मदत करतो.", "हा सर्वांशी प्रेमाने बोलतो.", "हा अभ्यासात मदत करतो."],
+  parent: ["शाळेत जायला खूप उत्सुक असतो.", "घरी रोज वाचन आणि अभ्यासाचा सराव करतो.", "शाळेतील गोष्टी घरी येऊन आवडीने सांगतो.", "शाळेत खूप रमत आहे."],
+  teacher: ["प्रगती उत्तम होत आहे, वाचनाचा सराव वाढव.", "आत्मविश्वास वाढला आहे, असाच प्रयत्न सुरु ठेव.", "सर्वांसोबत मिळून-मिसळून काम करतो.", "नियमित हजेरी व अभ्यासातील रुची वाखाणण्याजोगी आहे."],
+  final: [
+    "विद्यार्थी सर्व क्षेत्रांमध्ये अतिशय उत्तम प्रगती दर्शवत आहे. पुढील इयत्तेसाठी मनःपूर्वक शुभेच्छा!",
+    "सुरवातीला थोडा संकोच करणारा विद्यार्थी आता आत्मविश्वासाने सहभाग घेतो. प्रगती समाधानकारक आहे.",
+    "काही विषयात विशेष रुची दिसून येते. रोज वाचन-लेखनाचा सराव ठेवावा. पुढील वाटचालीस शुभेच्छा!"
+  ]
+};
+
+var remarkBanksGirl = {
+  self: ["मी शाळेत खेळायला येते.", "मला शाळेत यायला आणि शिकायला खूप आवडते.", "मी मैत्रिणींशी छान गप्पा मारते.", "मी रोज वेळेवर शाळेत येते."],
+  peer: ["आम्ही हिला खेळायला बोलावतो.", "ही खूप छान खेळते आणि मदत करते.", "ही सर्वांशी प्रेमाने बोलते.", "ही अभ्यासात मदत करते."],
+  parent: ["शाळेत जायला खूप उत्सुक असते.", "घरी रोज वाचन आणि अभ्यासाचा सराव करते.", "शाळेतील गोष्टी घरी येऊन आवडीने सांगते.", "शाळेत खूप रमत आहे."],
+  teacher: ["प्रगती उत्तम होत आहे, वाचनाचा सराव वाढव.", "आत्मविश्वास वाढला आहे, असाच प्रयत्न सुरु ठेव.", "सर्वांसोबत मिळून-मिसळून काम करते.", "नियमित हजेरी व अभ्यासातील रुची वाखाणण्याजोगी आहे."],
+  final: [
+    "विद्यार्थिनी सर्व क्षेत्रांमध्ये अतिशय उत्तम प्रगती दर्शवत आहे. पुढील इयत्तेसाठी मनःपूर्वक शुभेच्छा!",
+    "सुरवातीला थोडी संकोच करणारी विद्यार्थिनी आता आत्मविश्वासाने सहभाग घेते. प्रगती समाधानकारक आहे.",
+    "काही विषयात विशेष रुची दिसून येते. रोज वाचन-लेखनाचा सराव ठेवावा. पुढील वाटचालीस शुभेच्छा!"
+  ]
+};
+
+var remarkBanks = remarkBanksBoy;
+
+// Curricular Goals (CG), Competencies (C) & Outcomes for 12 Domains
+
+function getDomainsConfigForClass(clsName) {
+  var cls = String(clsName || 'इयत्ता पहिली').trim();
+  
+  if(cls.indexOf('दुसरी') !== -1) {
+    return [
+      { id: "d1_t1", page: 3, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (प्रथम सत्र)", cg: `• CG-1: बालके निरोगी व सुरक्षित सवयी विकसित करतात.
+• CG-2: ज्ञानेंद्रियांची कुशाग्रता विकसित करतात.
+• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.`, comp: `• C-1.2: स्वतः ची मूलभूत काळजी व स्वच्छतेबाबत सतर्क राहते.
+• C-1.6: असुरक्षित/धोकादायक परिस्थिती समजते व मदत मागते.`, act: `उपक्रम: दैनंदिन व्यायाम, धावणे व खेळ-स्पर्धा.
+निष्पत्ती: शारीरिक तंदुरुस्ती, सांघिक भावना व शिस्त विकसित होते.` },
+      { id: "d1_t2", page: 4, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (द्वितीय सत्र)", cg: `• CG-1: बालके निरोगी व सुरक्षित सवयी विकसित करतात.
+• CG-2: ज्ञानेंद्रियांची कुशाग्रता विकसित करतात.
+• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.`, comp: `• C-1.5: हालचालींमध्ये सजगता व तोल दर्शवते.
+• C-1.4: वस्तू आणि सोप्या साधनांचा सुरक्षितपणे वापर करते.`, act: `उपक्रम: आहार व वैयक्तिक स्वच्छता सवयी.
+निष्पत्ती: निरोगी आहाराला पसंती मिळते व आजारांपासून संरक्षण होते.` },
+      { id: "d2_t1", page: 5, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (प्रथम सत्र)", cg: `• CG-4: भावनिक बुद्धिमत्ता विकसित करतात.
+• CG-5: उत्पादक कार्याबाबत सकारात्मक दृष्टिकोन.
+• CG-6: नैसर्गिक वातावरणाबद्दल कृतज्ञताभाव दर्शवितात.`, comp: `• C-6.1: सर्व प्रकारच्या जीवांची काळजी घेते व आनंद व्यक्त करते.`, act: `उपक्रम: भावनांची अभिव्यक्ती व मित्र-मैत्रिणींशी संबंध.
+निष्पत्ती: EQ वाढते व सहकार्याची भावना दृढ होते.` },
+      { id: "d2_t2", page: 6, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (द्वितीय सत्र)", cg: `• CG-4: भावनांचे व्यवस्थापन व नियमांना प्रतिसाद.
+• CG-5: उत्पादक कार्याबाबत सकारात्मक दृष्टिकोन.`, comp: `• C-4.1: कुटुंब व समाजाचा घटक म्हणून स्वतःला ओळखतो.
+• C-4.5: शाळेतील सामाजिक नियम पाळतो.`, act: `उपक्रम: संवाद कौशल्य व जबाबदारीची जाणीव.
+निष्पत्ती: उत्तम श्रोता होण्याची सवय लागते व सामाजिक सलोखा वाढतो.` },
+      { id: "d3_t1", page: 7, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (प्रथम सत्र)", cg: `• CG-7: निरीक्षण व तार्किक विचाराने सभोवतालची जाणीव.
+• CG-8: गणितीय समज विकसित होते (राशी, आकार, संख्या).`, comp: `• C-8.6: ० ते ९९ अंकांची समज व सोपी बेरीज-वजाबाकी करतो.`, act: `उपक्रम: आकार व रंग वर्गीकरण, संख्या कोडी सोडवणे.
+निष्पत्ती: गणिताची प्राथमिक बैठक पक्की होते.` },
+      { id: "d3_t2", page: 8, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (द्वितीय सत्र)", cg: `• CG-7: तार्किक विचार.
+• CG-8: गणितीय समज व मोजमापे.`, comp: `• C-7.3: अध्ययनाच्या सुयोग्य सवयी वापरतो.
+• C-8.2: परिसरातील आकार व आकृतिबंध ओळखतो.`, act: `उपक्रम: मोजमाप व चित्र-निरीक्षण कार्यकारणभाव चर्चा.
+निष्पत्ती: तार्किक विचार व समस्या निवारण कौशल्य वाढते.` },
+      { id: "d4_t1", page: 9, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (प्रथम सत्र)", cg: `• CG-9: दैनंदिन संवादासाठी प्रभावी कौशल्ये.
+• CG-10: भाषा १ (L1) मध्ये सफाईदार वाचन व लेखन.`, comp: `• C-9.5: ऐकलेल्या गोष्टीवर प्रश्न विचारतो व स्पष्टीकरण देतो.`, act: `उपक्रम: चित्रवाचन व श्रवण कौशल्य (गोष्ट ऐकून सांगणे).
+निष्पत्ती: कल्पनाशक्ती व शब्दसंग्रह वाढतो.` },
+      { id: "d4_t2", page: 10, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (द्वितीय सत्र)", cg: `• CG-10: L1 मध्ये वाचन-लेखन.
+• CG-11: भाषा २ (L2) मध्ये वाचन-लेखन आरंभ.`, comp: `• C-10.3: लिपीतील सर्व अक्षरे ओळखतो व वापरतो.`, act: `उपक्रम: नाट्य/अभिनय व स्व-परिचय (वाचन-लेखन सराव).
+निष्पत्ती: आत्मविश्वास दुणावतो व अभिव्यक्ती स्पष्ट होते.` },
+      { id: "d5_t1", page: 11, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (प्रथम सत्र)", cg: `• CG-12: दृश्य आणि ललित कलांमध्ये संवेदनशीलता व्यक्त करतात.`, comp: `• C-12.4: स्थानिक कला व सांस्कृतिक उपक्रमात सहभाग घेतो.`, act: `उपक्रम: चित्रकला कार्यशाळा व हस्तकला (कागदकाम, मातीकाम).
+निष्पत्ती: सौंदर्यदृष्टीचा विकास व हस्तकौशल्य वाढते.` },
+      { id: "d5_t2", page: 12, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (द्वितीय सत्र)", cg: `• CG-12: ललित कलांमध्ये आपली संवेदनशीलता व्यक्त करतात.`, comp: `• C-12.5: स्थानिक संस्कृती आणि वारसा यांची प्रशंसा करतो.`, act: `उपक्रम: तालावर नृत्य, गायन व निसर्ग सौंदर्य निरीक्षण.
+निष्पत्ती: सांस्कृतिक जाणीव व संगीताची आवड निर्माण होते.` },
+      { id: "d6_t1", page: 13, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (प्रथम सत्र)", cg: `• CG-13: बालके अध्ययनाच्या सवयी विकसित करतात.`, comp: `• C-13.1: ध्येय प्राप्तीसाठी नियोजन व अवधान देतो.`, act: `उपक्रम: एकाग्रता वाढवणे व कुतूहलाने प्रश्न विचारणे.
+निष्पत्ती: अभ्यासात लक्ष केंद्रित करण्याची सवय लागते.` },
+      { id: "d6_t2", page: 14, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (द्वितीय सत्र)", cg: `• CG-13: अध्ययनाच्या सवयी विकसित करतात.`, comp: `• C-13.3: निरीक्षण व कुतूहलाने प्रश्न विचारतो.
+• C-13.4: वर्गखोलीतील नियम पाळतो.`, act: `उपक्रम: स्व-नियोजन व वस्तू जागेवर ठेवणे.
+निष्पत्ती: शिस्तबद्धता व स्वयंशिक्षणाची सवय लागते.` }
+    ];
+  }
+
+  // Default: इयत्ता पहिली / बालवाटिका / इतर
+  return [
+    { id: "d1_t1", page: 3, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (प्रथम सत्र)", cg: `• CG-1: बालके निरोगी व सुरक्षित सवयी विकसित करतात.
+• CG-2: ज्ञानेंद्रियांची कुशाग्रता विकसित करतात.
+• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.`, comp: `• C-1.1: पोषक आहाराबाबत रुची दर्शवतो व अन्न वाया घालवत नाही.
+• C-3.1: ज्ञानेंद्रियांच्या संवेदना व हालचालींत समन्वय दर्शवतो.`, act: `उपक्रम: शरीराच्या भागांची ओळख व शारीरिक हालचाल (चालणे, धावणे, उडी मारणे).
+निष्पत्ती: शारीरिक संतुलन, स्नायूंचे नियंत्रण सुधारते व चपळता येते.` },
+    { id: "d1_t2", page: 4, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (द्वितीय सत्र)", cg: `• CG-1: बालके निरोगी सवयी विकसित करतात.
+• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.`, comp: `• C-1.4: वस्तूंचा सुरक्षितपणे वापर करतो.
+• C-3.2: शारीरिक कृतींमध्ये तोल व लवचीकता दर्शवतो.`, act: `उपक्रम: आहार, आरोग्य व स्वच्छतेच्या सवयी (हात धुणे, दात घासणे).
+निष्पत्ती: दैनंदिन स्वच्छतेची सवय अंगवळणी पडते व आजारांपासून संरक्षण होते.` },
+    { id: "d2_t1", page: 5, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (प्रथम सत्र)", cg: `• CG-4: भावनिक बुद्धिमत्ता विकसित करतात (भावनांचे व्यवस्थापन).
+• CG-6: नैसर्गिक वातावरणाबद्दल कृतज्ञता दर्शवितात.`, comp: `• C-4.3: इतर बालके आणि प्रौढ यांच्याशी सहजतेने संवाद साधतो.`, act: `उपक्रम: भावनांची अभिव्यक्ती व मित्र-मैत्रिणींशी संबंध (खेळणी वाटून घेणे).
+निष्पत्ती: भावनिक बुद्धिमत्ता (EQ) वाढते व सहकार्याची भावना दृढ होते.` },
+    { id: "d2_t2", page: 6, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (द्वितीय सत्र)", cg: `• CG-4: भावनांचे व्यवस्थापन व नियमांना प्रतिसाद.
+• CG-5: उत्पादक कार्याबाबत सकारात्मक दृष्टिकोन.`, comp: `• C-4.1: कुटुंब व समाजाचा घटक म्हणून स्वतःला ओळखतो.
+• C-4.5: शाळेतील सामाजिक नियम पाळतो.`, act: `उपक्रम: संवाद कौशल्य व जबाबदारीची जाणीव (वस्तू जागेवर ठेवणे).
+निष्पत्ती: उत्तम श्रोता होण्याची सवय लागते व जबाबदारीने वागण्याची सवय लागते.` },
+    { id: "d3_t1", page: 7, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (प्रथम सत्र)", cg: `• CG-7: निरीक्षण व तार्किक विचाराने सभोवतालची जाणीव.
+• CG-8: गणितीय समज विकसित होते (राशी, आकार, संख्या).`, comp: `• C-7.2: निसर्गाच्या निरीक्षणातून कार्यकारणभाव समजतो.
+• C-8.7: गुणाकार (पुन्हा बेरीज) व भागाकार संकल्पना समजतो.`, act: `उपक्रम: चित्र निरीक्षण व कारण-परिणाम चर्चा ('पाऊस आला तर काय करतो?').
+निष्पत्ती: निरीक्षण शक्ती, एकाग्रता व तार्किक विचार क्षमता वाढते.` },
+    { id: "d3_t2", page: 8, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (द्वितीय सत्र)", cg: `• CG-7: तार्किक विचार.
+• CG-8: गणितीय समज व मोजमापे.`, comp: `• C-7.3: अध्ययनाच्या सुयोग्य सवयी वापरतो.
+• C-8.2: परिसरातील आकार व आकृतिबंध ओळखतो.`, act: `उपक्रम: संख्या मोजणी (१ ते १०) व जिगसॉ कोडी सोडवणे.
+निष्पत्ती: गणिताची प्राथमिक बैठक पक्की होते व समस्या सोडवण्याचे कौशल्य वाढते.` },
+    { id: "d4_t1", page: 9, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (प्रथम सत्र)", cg: `• CG-9: दैनंदिन संवादासाठी प्रभावी कौशल्ये.
+• CG-10: भाषा १ (L1) मध्ये सफाईदार वाचन व लेखन.`, comp: `• C-10.6: छोट्या कविता वाचतो व कल्पनेची प्रशंसा करतो.`, act: `उपक्रम: चित्रवाचन व श्रवण कौशल्य (गोष्ट ऐकून पात्रे लक्षात ठेवणे).
+निष्पत्ती: कल्पनाशक्तीचा विकास होऊन स्वतःच्या शब्दांत विचार मांडण्याची क्षमता येते.` },
+    { id: "d4_t2", page: 10, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (द्वितीय सत्र)", cg: `• CG-10: L1 मध्ये वाचन-लेखन.
+• CG-11: भाषा २ (L2) मध्ये वाचन-लेखन आरंभ.`, comp: `• C-10.3: लिपीतील सर्व अक्षरे ओळखतो व वापरतो.
+• C-10.9: विविध पुस्तके वाचण्यात रुची दर्शवतो.`, act: `उपक्रम: नाट्य/अभिनय व स्व-परिचय (कुटुंबाबद्दल बोलणे).
+निष्पत्ती: रंगमंचीय धाडस वाढते, उच्चार स्पष्ट होतात व आत्मविश्वास दुणावतो.` },
+    { id: "d5_t1", page: 11, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (प्रथम सत्र)", cg: `• CG-12: दृश्य आणि ललित कलांमध्ये संवेदनशीलता कलेद्वारे व्यक्त करतात.`, comp: `• C-12.1: 2D आणि 3D कलाकृतींसाठी साहित्य हाताळतो.
+• C-12.3: नवनिर्मितीसाठी सर्जनशीलता वापरतो.`, act: `उपक्रम: चित्रकला कार्यशाळा व हस्तकला (कागदकाम, मातीकाम).
+निष्पत्ती: सौंदर्यदृष्टीचा विकास व बोटांच्या स्नायूंचे नियंत्रण वाढते.` },
+    { id: "d5_t2", page: 12, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (द्वितीय सत्र)", cg: `• CG-12: ललित कलांमध्ये आपली संवेदनशीलता व्यक्त करतात.`, comp: `• C-12.5: स्थानिक संस्कृती आणि वारसा यांची प्रशंसा करतो.`, act: `उपक्रम: नृत्य कौशल्य (तालावर हालचाली) व परिसरातील निसर्ग सौंदर्य निरीक्षण.
+निष्पत्ती: शारीरिक लवचिकता वाढून मनाला उत्साह व आनंद मिळतो.` },
+    { id: "d6_t1", page: 13, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (प्रथम सत्र)", cg: `• CG-13: बालके अध्ययनाच्या सवयी विकसित करतात (औपचारिक शिक्षणासाठी तयारी).`, comp: `• C-13.1: ध्येय प्राप्तीसाठी नियोजन, अवधान व मार्गदर्शित कृती करतो.`, act: `उपक्रम: एकाग्रता वाढवणे व कुतूहल/शोध (प्रश्न विचारणे).
+निष्पत्ती: कोणतेही काम न विचलित होता पूर्ण करण्याची सकारात्मक सवय लागते.` },
+    { id: "d6_t2", page: 14, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (द्वितीय सत्र)", cg: `• CG-13: अध्ययनाच्या सवयी विकसित करतात.`, comp: `• C-13.3: निरीक्षण व कुतूहलाने प्रश्न विचारतो.
+• C-13.4: वर्गखोलीतील नियम पाळतो.`, act: `उपक्रम: नियोजन कौशल्य व चुकांमधून शिकणे.
+निष्पत्ती: वेळेचे व्यवस्थापन येते व न खचता प्रयत्नशील राहण्याचा दृष्टिकोन बनतो.` }
+  ];
+}
+
+var domainsConfig = getDomainsConfigForClass("इयत्ता पहिली");
+var legacyDomainsConfig = [
+  { id: "d1_t1", page: 3, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (प्रथम सत्र)", cg: "• CG-1: बालके निरोगी व सुरक्षित सवयी विकसित करतात.\n• CG-2: ज्ञानेंद्रियांची कुशाग्रता विकसित करतात.\n• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.", comp: "• C-1.1: पोषक आहाराबाबत रुची दर्शवतो व अन्न वाया घालवत नाही.\n• C-3.1: ज्ञानेंद्रियांच्या संवेदना व हालचालींत समन्वय दर्शवतो.", act: "उपक्रम: शरीराच्या भागांची ओळख व शारीरिक हालचाल (चालणे, धावणे, उडी मारणे).\nनिष्पत्ती: शारीरिक संतुलन, स्नायूंचे नियंत्रण सुधारते व चपळता येते." },
+  { id: "d1_t2", page: 4, title: "क्षेत्र १: शारीरिक आणि आरोग्य विकास (द्वितीय सत्र)", cg: "• CG-1: बालके निरोगी सवयी विकसित करतात.\n• CG-3: सुदृढ आणि लवचीक शरीर विकसित होते.", comp: "• C-1.4: वस्तूंचा सुरक्षितपणे वापर करतो.\n• C-3.2: शारीरिक कृतींमध्ये तोल व लवचीकता दर्शवतो.", act: "उपक्रम: आहार, आरोग्य व स्वच्छतेच्या सवयी (हात धुणे, दात घासणे).\nनिष्पत्ती: दैनंदिन स्वच्छतेची सवय अंगवळणी पडते व आजारांपासून संरक्षण होते." },
+  { id: "d2_t1", page: 5, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (प्रथम सत्र)", cg: "• CG-4: भावनिक बुद्धिमत्ता विकसित करतात (भावनांचे व्यवस्थापन).\n• CG-6: नैसर्गिक वातावरणाबद्दल कृतज्ञता दर्शवितात.", comp: "• C-4.3: इतर बालके आणि प्रौढ यांच्याशी सहजतेने संवाद साधतो.", act: "उपक्रम: भावनांची अभिव्यक्ती व मित्र-मैत्रिणींशी संबंध (खेळणी वाटून घेणे).\nनिष्पत्ती: भावनिक बुद्धिमत्ता (EQ) वाढते व सहकार्याची भावना दृढ होते." },
+  { id: "d2_t2", page: 6, title: "क्षेत्र २: सामाजिक, भावनिक व नैतिक विकास (द्वितीय सत्र)", cg: "• CG-4: भावनांचे व्यवस्थापन व नियमांना प्रतिसाद.\n• CG-5: उत्पादक कार्याबाबत सकारात्मक दृष्टिकोन.", comp: "• C-4.1: कुटुंब व समाजाचा घटक म्हणून स्वतःला ओळखतो.\n• C-4.5: शाळेतील सामाजिक नियम पाळतो.", act: "उपक्रम: संवाद कौशल्य व जबाबदारीची जाणीव (वस्तू जागेवर ठेवणे).\nनिष्पत्ती: उत्तम श्रोता होण्याची सवय लागते व जबाबदारीने वागण्याची सवय लागते." },
+  { id: "d3_t1", page: 7, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (प्रथम सत्र)", cg: "• CG-7: निरीक्षण व तार्किक विचाराने सभोवतालची जाणीव.\n• CG-8: गणितीय समज विकसित होते (राशी, आकार, संख्या).", comp: "• C-7.2: निसर्गाच्या निरीक्षणातून कार्यकारणभाव समजतो.\n• C-8.7: गुणाकार (पुन्हा बेरीज) व भागाकार संकल्पना समजतो.", act: "उपक्रम: चित्र निरीक्षण व कारण-परिणाम चर्चा ('पाऊस आला तर काय करतो?').\nनिष्पत्ती: निरीक्षण शक्ती, एकाग्रता व तार्किक विचार क्षमता वाढते." },
+  { id: "d3_t2", page: 8, title: "क्षेत्र ३: बोधात्मक (ज्ञानात्मक) विकास (द्वितीय सत्र)", cg: "• CG-7: तार्किक विचार.\n• CG-8: गणितीय समज व मोजमापे.", comp: "• C-7.3: अध्ययनाच्या सुयोग्य सवयी वापरतो.\n• C-8.2: परिसरातील आकार व आकृतिबंध ओळखतो.", act: "उपक्रम: संख्या मोजणी (१ ते १०) व जिगसॉ कोडी सोडवणे.\nनिष्पत्ती: गणिताची प्राथमिक बैठक पक्की होते व समस्या सोडवण्याचे कौशल्य वाढते." },
+  { id: "d4_t1", page: 9, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (प्रथम सत्र)", cg: "• CG-9: दैनंदिन संवादासाठी प्रभावी कौशल्ये.\n• CG-10: भाषा १ (L1) मध्ये सफाईदार वाचन व लेखन.", comp: "• C-10.6: छोट्या कविता वाचतो व कल्पनेची प्रशंसा करतो.", act: "उपक्रम: चित्रवाचन व श्रवण कौशल्य (गोष्ट ऐकून पात्रे लक्षात ठेवणे).\nनिष्पत्ती: कल्पनाशक्तीचा विकास होऊन स्वतःच्या शब्दांत विचार मांडण्याची क्षमता येते." },
+  { id: "d4_t2", page: 10, title: "क्षेत्र ४: भाषा आणि साक्षरता विकास (द्वितीय सत्र)", cg: "• CG-10: L1 मध्ये वाचन-लेखन.\n• CG-11: भाषा २ (L2) मध्ये वाचन-लेखन आरंभ.", comp: "• C-10.3: लिपीतील सर्व अक्षरे ओळखतो व वापरतो.\n• C-10.9: विविध पुस्तके वाचण्यात रुची दर्शवतो.", act: "उपक्रम: नाट्य/अभिनय व स्व-परिचय (कुटुंबाबद्दल बोलणे).\nनिष्पत्ती: रंगमंचीय धाडस वाढते, उच्चार स्पष्ट होतात व आत्मविश्वास दुणावतो." },
+  { id: "d5_t1", page: 11, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (प्रथम सत्र)", cg: "• CG-12: दृश्य आणि ललित कलांमध्ये संवेदनशीलता कलेद्वारे व्यक्त करतात.", comp: "• C-12.1: 2D आणि 3D कलाकृतींसाठी साहित्य हाताळतो.\n• C-12.3: नवनिर्मितीसाठी सर्जनशीलता वापरतो.", act: "उपक्रम: चित्रकला कार्यशाळा व हस्तकला (कागदकाम, मातीकाम).\nनिष्पत्ती: सौंदर्यदृष्टीचा विकास व बोटांच्या स्नायूंचे नियंत्रण वाढते." },
+  { id: "d5_t2", page: 12, title: "क्षेत्र ५: सौंदर्यदृष्टी आणि सांस्कृतिक विकास (द्वितीय सत्र)", cg: "• CG-12: ललित कलांमध्ये आपली संवेदनशीलता व्यक्त करतात.", comp: "• C-12.5: स्थानिक संस्कृती आणि वारसा यांची प्रशंसा करतो.", act: "उपक्रम: नृत्य कौशल्य (तालावर हालचाली) व परिसरातील निसर्ग सौंदर्य निरीक्षण.\nनिष्पत्ती: शारीरिक लवचिकता वाढून मनाला उत्साह व आनंद मिळतो." },
+  { id: "d6_t1", page: 13, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (प्रथम सत्र)", cg: "• CG-13: बालके अध्ययनाच्या सवयी विकसित करतात (औपचारिक शिक्षणासाठी तयारी).", comp: "• C-13.1: ध्येय प्राप्तीसाठी नियोजन, अवधान व मार्गदर्शित कृती करतो.", act: "उपक्रम: एकाग्रता वाढवणे व कुतूहल/शोध (प्रश्न विचारणे).\nनिष्पत्ती: कोणतेही काम न विचलित होता पूर्ण करण्याची सकारात्मक सवय लागते." },
+  { id: "d6_t2", page: 14, title: "क्षेत्र ६: सकारात्मक अध्ययन सवयी (द्वितीय सत्र)", cg: "• CG-13: अध्ययनाच्या सवयी विकसित करतात.", comp: "• C-13.3: निरीक्षण व कुतूहलाने प्रश्न विचारतो.\n• C-13.4: वर्गखोलीतील नियम मनःपूर्वक पाळतो.", act: "उपक्रम: नियोजन कौशल्य व चुकांमधून शिकणे.\nनिष्पत्ती: वेळेचे व्यवस्थापन येते व न खचता प्रयत्नशील राहण्याचा दृष्टिकोन बनतो." }
+];
+
+// Master Level Remarks
+var levelRemarksBank = {
+  nirjhar: [
+    "विषयाची प्राथमिक ओळख झाली असून शिक्षकांच्या मार्गदर्शनाखाली सराव करतो/करते.",
+    "संकल्पना समजण्यास सुरवात झाली आहे. अधिक उजळणी व साहाय्याची गरज आहे.",
+    "कृतीमध्ये सहभागी होतो/होते, कौशल्ये विकसित करण्यासाठी सरावाची आवश्यकता आहे.",
+    "मूलभूत संकल्पना समजून घेण्याचा प्रयत्न करतो/करते, नियमित सरावाने प्रगती होईल."
+  ],
+  parvat: [
+    "संकल्पनांची चांगली जाण आहे. कौशल्ये विकसित होत असून सरावाने प्रगती होत आहे.",
+    "अपेक्षित उद्दिष्टे साध्य करत असून स्वतःहून प्रयत्न करण्याचा सराव वाढला आहे.",
+    "मार्गदर्शनाशिवाय बहुतांश कृती अचूक करतो/करते, एकाग्रतेने काम करण्याची क्षमता उत्तम आहे.",
+    "अध्ययनात चांगली रुची दाखवतो/दाखवते व विचारलेल्या प्रश्नांची योग्य उत्तरे देतो/देते."
+  ],
+  aakash: [
+    "सर्व संकल्पना जलद व अचूकपणे आत्मसात करतो/करते. स्वतंत्रपणे व आत्मविश्वासाने कार्य करतो/करते.",
+    "सर्जनशीलता व तार्किक विचारक्षमता उत्तम आहे. इतर मित्रांनाही अभ्यासात मदत करतो/करते.",
+    "चौकटीबाहेरचा विचार करून नवीन कल्पना मांडतो/मांडते. नेतृत्त्वगुण वाखाणण्याजोगा आहे.",
+    "अपेक्षित कौशल्यांमध्ये नैपुण्य प्राप्त केले असून कल्पकतेने कोणतीही नवीन कृती आत्मसात करतो/करते."
+  ]
+};
+
+var levelRemarks = {
+  "nirjhar": levelRemarksBank.nirjhar[0],
+  "parvat": levelRemarksBank.parvat[0],
+  "aakash": levelRemarksBank.aakash[0]
+};
+
+function getLevelKeyFromText(val) {
+  var str = String(val || '').toLowerCase();
+  if(str.indexOf('निर्झर') !== -1 || str.indexOf('प्रवाह') !== -1 || str.indexOf('nirjhar') !== -1) return 'nirjhar';
+  if(str.indexOf('आकाश') !== -1 || str.indexOf('aakash') !== -1) return 'aakash';
+  return 'parvat';
+}
+
+function updateLevelRemarkDropdown(aKey) {
+  var lvlEl = document.getElementById('db_dom_lvl_' + aKey);
+  var remSel = document.getElementById('db_dom_rem_' + aKey + '_sel');
+  if(!lvlEl || !remSel) return;
+
+  var currentLvl = lvlEl.value;
+  var lKey = getLevelKeyFromText(currentLvl);
+  var opts = levelRemarksBank[lKey] || levelRemarksBank.parvat;
+
+  var currentSelVal = remSel.value;
+  remSel.innerHTML = '';
+
+  opts.forEach(function(optText) {
+    var opt = document.createElement('option');
+    opt.value = optText;
+    opt.innerText = optText;
+    remSel.appendChild(opt);
+  });
+
+  var custOpt = document.createElement('option');
+  custOpt.value = 'CUSTOM';
+  custOpt.innerText = '✍️ स्वतःचा मसुदा टाईप करा (Custom)...';
+  remSel.appendChild(custOpt);
+
+  var found = false;
+  for(var i = 0; i < remSel.options.length; i++) {
+    if(remSel.options[i].value === currentSelVal) {
+      remSel.selectedIndex = i;
+      found = true;
+      break;
+    }
+  }
+  if(!found) {
+    remSel.selectedIndex = 0;
+  }
+
+  toggleCustomLevelRemarkInput(aKey);
+}
+
+function toggleCustomLevelRemarkInput(aKey) {
+  var remSel = document.getElementById('db_dom_rem_' + aKey + '_sel');
+  var customInp = document.getElementById('db_dom_rem_' + aKey + '_custom');
+  if(!remSel || !customInp) return;
+
+  if(remSel.value === 'CUSTOM') {
+    customInp.style.display = 'block';
+  } else {
+    customInp.style.display = 'none';
+  }
+  saveActiveDomainData();
+}
+
+// Students Database
+var students = [
+  {
+    roll: 1, name: "अमित अरुण धानवले", gender: "boy", cls: "इयत्ता पहिली", father: "अरुण बाळू धानवले", mother: "जनाबाई अरुण धानवले",
+    gr: "GR-101", dob: "2019-06-18", aadhaar: "643532830840", mobile: "9876543210", address: "मु. पो. महाबळेश्वर ता. महाबळेश्वर जि. सातारा",
+    h1: 115, h2: 117, w1: 19, w2: 20,
+    att: {
+      w_jun:20, p_jun:18, w_jul:22, p_jul:20, w_aug:21, p_aug:19, w_sep:20, p_sep:18, w_oct:18, p_oct:16,
+      w_nov:20, p_nov:18, w_jan:22, p_jan:20, w_feb:20, p_feb:18, w_mar:22, p_mar:20, w_apr:18, p_apr:16
+    },
+    hobbies: ["क्रीडा किंवा खेळ", "चित्रकला", "गायन"],
+    favColor: "पांढरा", favFlower: "निशिगंध", favFood: "पिझ्झा", favSport: "क्रिकेट", favAnimal: "वाघ", favSubject: "मराठी",
+    aim: "इंजिनिअर", friends: "शिवरुद्र, हर्षद, वीरांश",
+    levels: {
+      "d1_t1_a1": "आकाश", "d1_t1_a2": "आकाश", "d1_t1_a3": "आकाश",
+      "d1_t2_a1": "आकाश", "d1_t2_a2": "आकाश", "d1_t2_a3": "आकाश",
+      "d2_t1_a1": "पर्वत", "d2_t1_a2": "पर्वत", "d2_t1_a3": "पर्वत",
+      "d2_t2_a1": "पर्वत", "d2_t2_a2": "पर्वत", "d2_t2_a3": "पर्वत",
+      "d3_t1_a1": "आकाश", "d3_t1_a2": "आकाश", "d3_t1_a3": "आकाश",
+      "d3_t2_a1": "आकाश", "d3_t2_a2": "आकाश", "d3_t2_a3": "आकाश",
+      "d4_t1_a1": "निर्झर/प्रवाह", "d4_t1_a2": "निर्झर/प्रवाह", "d4_t1_a3": "निर्झर/प्रवाह",
+      "d4_t2_a1": "निर्झर/प्रवाह", "d4_t2_a2": "निर्झर/प्रवाह", "d4_t2_a3": "निर्झर/प्रवाह",
+      "d5_t1_a1": "पर्वत", "d5_t1_a2": "पर्वत", "d5_t1_a3": "पर्वत",
+      "d5_t2_a1": "पर्वत", "d5_t2_a2": "पर्वत", "d5_t2_a3": "पर्वत",
+      "d6_t1_a1": "आकाश", "d6_t1_a2": "आकाश", "d6_t1_a3": "आकाश",
+      "d6_t2_a1": "आकाश", "d6_t2_a2": "आकाश", "d6_t2_a3": "आकाश"
+    },
+    self1: "मी शाळेत खेळायला येतो/येते.", self2: "मला शाळेत यायला आणि शिकायला खूप आवडते.",
+    peer1: "आम्ही याला/हिला खेळायला बोलावतो.", peer2: "हा/ही खूप छान खेळतो/खेळते आणि मदत करतो/करते.",
+    parent1: "शाळेत जायला खूप उत्सुक असतो/असते.", parent2: "शाळेत खूप रमत आहे.",
+    teacher1: "प्रगती उत्तम होत आहे, वाचनाचा सराव वाढव.", teacher2: "आत्मविश्वास वाढला आहे, असाच प्रयत्न सुरु ठेव.",
+    finalEval: "विद्यार्थी सर्व क्षेत्रांमध्ये अतिशय उत्तम प्रगती दर्शवत आहे. पुढील इयत्तेसाठी मनःपूर्वक शुभेच्छा!"
+  },
+  {
+    roll: 2, name: "आराध्या आनंदा दिघे", gender: "girl", cls: "इयत्ता पहिली", father: "आनंदा दिघे", mother: "सुमन आनंदा दिघे",
+    gr: "GR-102", dob: "2019-12-01", aadhaar: "461116274037", mobile: "9876543211", address: "मु. पो. महाबळेश्वर ता. महाबळेश्वर जि. सातारा",
+    h1: 112, h2: 114, w1: 17, w2: 18,
+    att: {
+      w_jun:20, p_jun:19, w_jul:22, p_jul:21, w_aug:21, p_aug:20, w_sep:20, p_sep:19, w_oct:18, p_oct:17,
+      w_nov:20, p_nov:19, w_jan:22, p_jan:21, w_feb:20, p_feb:19, w_mar:22, p_mar:21, w_apr:18, p_apr:17
+    },
+    hobbies: ["चित्रकला", "गायन", "नृत्य"],
+    favColor: "गुलाबी", favFlower: "कमळ", favFood: "चॉकलेट", favSport: "लंगडी", favAnimal: "मोर", favSubject: "मराठी",
+    aim: "डॉक्टर", friends: "कार्तिक, भक्ति, नित्य",
+    levels: {
+      "d1_t1_a1": "पर्वत", "d1_t1_a2": "पर्वत", "d1_t1_a3": "पर्वत",
+      "d1_t2_a1": "पर्वत", "d1_t2_a2": "पर्वत", "d1_t2_a3": "पर्वत",
+      "d2_t1_a1": "निर्झर/प्रवाह", "d2_t1_a2": "निर्झर/प्रवाह", "d2_t1_a3": "निर्झर/प्रवाह",
+      "d2_t2_a1": "निर्झर/प्रवाह", "d2_t2_a2": "निर्झर/प्रवाह", "d2_t2_a3": "निर्झर/प्रवाह",
+      "d3_t1_a1": "पर्वत", "d3_t1_a2": "पर्वत", "d3_t1_a3": "पर्वत",
+      "d3_t2_a1": "पर्वत", "d3_t2_a2": "पर्वत", "d3_t2_a3": "पर्वत",
+      "d4_t1_a1": "पर्वत", "d4_t1_a2": "पर्वत", "d4_t1_a3": "पर्वत",
+      "d4_t2_a1": "पर्वत", "d4_t2_a2": "पर्वत", "d4_t2_a3": "पर्वत",
+      "d5_t1_a1": "आकाश", "d5_t1_a2": "आकाश", "d5_t1_a3": "आकाश",
+      "d5_t2_a1": "आकाश", "d5_t2_a2": "आकाश", "d5_t2_a3": "आकाश",
+      "d6_t1_a1": "पर्वत", "d6_t1_a2": "पर्वत", "d6_t1_a3": "पर्वत",
+      "d6_t2_a1": "पर्वत", "d6_t2_a2": "पर्वत", "d6_t2_a3": "पर्वत"
+    },
+    self1: "मला शाळेत यायला आणि शिकायला खूप आवडते.", self2: "मी रोज वेळेवर शाळेत येतो/येते.",
+    peer1: "हा/ही खूप छान खेळतो/खेळते आणि मदत करतो/करते.", peer2: "हा/ही अभ्यासात मदत करतो/करते.",
+    parent1: "शाळेतील गोष्टी घरी येऊन आवडीने सांगतो/सांगते.", parent2: "शाळेत खूप रमत आहे.",
+    teacher1: "नियमित हजेरी व अभ्यासातील रुची वाखाणण्याजोगी आहे.", teacher2: "आत्मविश्वास वाढला आहे, असाच प्रयत्न सुरु ठेव.",
+    finalEval: "सुरवातीला थोडा संकोच करणारा विद्यार्थी आता आत्मविश्वासाने सहभाग घेतो. प्रगती समाधानकारक आहे."
+  }
+];
+
+var currentIndex = 0;
+
+window.onload = function() {
+  loadFromLocalStorage();
+  updateStudentSelectDropdown();
+  buildTeacherMappingInputs();
+  populateDropdownOptions();
+  buildDomainLevelForm();
+  updateSyncedSchoolsTable();
+  
+  // Auto-sync from Google Sheet on load cleanly
+  syncGoogleSheetDatabaseSilently();
+
+  // SHOW HOME VIEW BY DEFAULT 100%
+  document.getElementById('homeView').style.display = 'block';
+  document.getElementById('blockView').style.display = 'none';
+  document.getElementById('appNavbar').style.display = 'none';
+  document.getElementById('reportView').style.display = 'none';
+};
+
+function showHomeView() {
+  document.getElementById('homeView').style.display = 'block';
+  document.getElementById('blockView').style.display = 'none';
+  document.getElementById('appNavbar').style.display = 'none';
+  var dashEl = document.getElementById('dashView');
+  if(dashEl) dashEl.style.display = 'none';
+  document.getElementById('reportView').style.display = 'none';
+  document.getElementById('dbView').style.display = 'none';
+  document.getElementById('schoolView').style.display = 'none';
+}
+
+function verifyAndUnlockApp() {
+  var inputVal = document.getElementById('homeUdiseInput').value.replace(/[^0-9a-zA-Z]/g, '').trim();
+  var status = document.getElementById('homeUdiseStatus');
+  
+  if(!inputVal) {
+    status.style.color = "#c62828";
+    status.innerText = "⚠️ कृपया यू-डायस कोड टाका!";
+    return;
+  }
+
+  var foundName = registeredSchools[inputVal];
+  var foundAddress = registeredSchoolAddresses[inputVal] || "";
+  
+  if(!foundName) {
+    for(var k in registeredSchools) {
+      if(k === inputVal || k.replace(/[^0-9a-zA-Z]/g, '') === inputVal) {
+        foundName = registeredSchools[k];
+        foundAddress = registeredSchoolAddresses[k] || "";
+        break;
+      }
+    }
+  }
+
+  if(foundName) {
+    activeSchoolUdise = inputVal;
+    schoolSettings.name = foundName;
+    schoolSettings.address = foundAddress || ""; // Column C address synced cleanly to report pages!
+    saveToLocalStorage();
+
+    status.style.color = "#2e7d32";
+    status.innerText = "✅ अधिकृत शाळा: " + foundName;
+
+    setTimeout(function() {
+      document.getElementById('homeView').style.display = 'none';
+      document.getElementById('blockView').style.display = 'none';
+      document.getElementById('appNavbar').style.display = 'flex';
+      var titleEl = document.getElementById('dashSchoolTitle');
+      if(titleEl) titleEl.innerText = "🏫 " + foundName + (foundAddress ? " (" + foundAddress + ")" : "");
+      updateStudentSelectDropdown();
+      loadStudentToForm();
+      renderAll16Pages();
+      switchTab('dashView');
+    }, 400);
+
+  } else {
+    document.getElementById('homeView').style.display = 'none';
+    document.getElementById('blockView').style.display = 'block';
+  }
+}
+
+function switchTab(viewId, btn) {
+  var dashEl = document.getElementById('dashView');
+  var repEl = document.getElementById('reportView');
+  var dbEl = document.getElementById('dbView');
+  var schEl = document.getElementById('schoolView');
+
+  if(dashEl) dashEl.style.display = viewId === 'dashView' ? 'block' : 'none';
+  if(repEl) repEl.style.display = viewId === 'reportView' ? 'block' : 'none';
+  if(dbEl) dbEl.style.display = viewId === 'dbView' ? 'block' : 'none';
+  if(schEl) schEl.style.display = viewId === 'schoolView' ? 'block' : 'none';
+  
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  if(btn) {
+    btn.classList.add('active');
+  }
+
+  if(viewId === 'reportView') {
+    updateStudentSelectDropdown();
+    loadStudentToForm();
+    renderAll16Pages();
+  }
+}
+
+function openAdminModal() {
+  document.getElementById('adminModal').style.display = 'flex';
+  document.getElementById('adminPassBox').style.display = 'block';
+  document.getElementById('adminControlsBox').style.display = 'none';
+  document.getElementById('adminPassInput').value = '';
+  document.getElementById('adminPassError').innerText = '';
+}
+
+function closeAdminModal() {
+  document.getElementById('adminModal').style.display = 'none';
+  showHomeView();
+}
+
+function checkAdminPassword() {
+  var pass = document.getElementById('adminPassInput').value;
+  if(pass === 'Yadps#%1990') {
+    document.getElementById('adminPassBox').style.display = 'none';
+    document.getElementById('adminControlsBox').style.display = 'block';
+    updateSyncedSchoolsTable();
+  } else {
+    document.getElementById('adminPassError').innerText = '❌ चुकीचा पासवर्ड!';
+  }
+}
+
+function openGoogleSheetApp() {
+  window.open("https://docs.google.com/spreadsheets/d/130i07moYJTdcf2zsUXe42KwYKaGX493UERQ6VO0-kHM/edit?usp=drivesdk", "_blank");
+}
+
+function handleGvizSyncResponse(resp) {
+  try {
+    if(resp && resp.status === 'ok' && resp.table && resp.table.rows) {
+      var count = parseAndSaveSheetRows(resp.table.rows);
+      var status = document.getElementById('syncStatus');
+      if(status) {
+        status.style.color = "#2e7d32";
+        status.innerText = "✅ गुगल शीट सिंक यशस्वी! एकूण " + count + " शाळा अद्ययावत झाल्या.";
+      }
+    }
+  } catch(e) {}
+}
+
+function parseAndSaveSheetRows(rows) {
+  var count = 0;
+  for(var i = 0; i < rows.length; i++) {
+    // Row 1 (i = 0) is Header Row (A1: UDISE, B1: Name, C1: Address, D1: Capacity/Pat)
+    if(i === 0) continue;
+
+    var row = rows[i];
+    if(row.c && row.c.length >= 1) {
+      var rawUdise = row.c[0] ? (row.c[0].v || row.c[0].f || "") : "";
+      var udise = String(rawUdise).replace(/[^0-9a-zA-Z]/g, '').trim();
+      
+      var rawName = (row.c.length >= 2 && row.c[1]) ? (row.c[1].v || row.c[1].f || "") : "";
+      var rawAddr = (row.c.length >= 3 && row.c[2]) ? (row.c[2].v || row.c[2].f || "") : "";
+      
+      var name = String(rawName).trim() || "नोंदणीकृत शाळा";
+      var addr = String(rawAddr).trim();
+
+      // Skip header row if repeated or contains heading words
+      var udiseLower = udise.toLowerCase();
+      if(udiseLower.indexOf('udise') !== -1 || udiseLower.indexOf('यु') !== -1 || udiseLower.indexOf('डायस') !== -1 || udiseLower.indexOf('कोड') !== -1) continue;
+
+      var rawLimit = (row.c.length >= 4 && row.c[3]) ? (row.c[3].v || row.c[3].f || "") : "";
+      var parsedLimit = parseInt(String(rawLimit).replace(/[^0-9]/g, '')) || 50;
+
+      if(udise.length >= 3) {
+        registeredSchools[udise] = name;
+        registeredSchoolAddresses[udise] = addr; // Column C Address synced cleanly
+        registeredSchoolLimits[udise] = parsedLimit; // Column D Student Limit synced cleanly
+        if(activeSchoolUdise && (udise === activeSchoolUdise || activeSchoolUdise.replace(/[^0-9a-zA-Z]/g, '') === udise)) {
+          activeSchoolLimit = parsedLimit;
+        }
+        count++;
+      }
+    }
+  }
+  saveToLocalStorage();
+  updateSyncedSchoolsTable();
+  return count;
+}
+
+function syncGoogleSheetDatabase() {
+  var status = document.getElementById('syncStatus');
+  if(status) {
+    status.style.color = "#0277bd";
+    status.innerText = "🔄 गुगल शीटवरून शाळा सिंक होत आहे...";
+  }
+
+  var script = document.createElement('script');
+  script.src = "https://docs.google.com/spreadsheets/d/130i07moYJTdcf2zsUXe42KwYKaGX493UERQ6VO0-kHM/gviz/tq?tqx=responseHandler:handleGvizSyncResponse&t=" + Date.now();
+  document.body.appendChild(script);
+}
+
+function syncGoogleSheetDatabaseSilently() {
+  var script = document.createElement('script');
+  script.src = "https://docs.google.com/spreadsheets/d/130i07moYJTdcf2zsUXe42KwYKaGX493UERQ6VO0-kHM/gviz/tq?tqx=responseHandler:handleGvizSyncResponse&t=" + Date.now();
+  document.body.appendChild(script);
+}
+
+function addManualSchool() {
+  var u = document.getElementById('manualUdise').value.replace(/[^0-9a-zA-Z]/g, '').trim();
+  var n = document.getElementById('manualName').value.trim();
+  var l = parseInt(document.getElementById('manualLimit').value) || 50;
+  if(!u || !n) {
+    alert("कृपया यु-डायस कोड व शाळेचे नाव पूर्ण टाका!");
+    return;
+  }
+  registeredSchools[u] = n;
+  registeredSchoolLimits[u] = l;
+  saveToLocalStorage();
+  updateSyncedSchoolsTable();
+  document.getElementById('manualUdise').value = '';
+  document.getElementById('manualName').value = '';
+  alert("✅ मॅन्युअल शाळा सेव्ह झाली!");
+}
+
+function deleteSchool(udise) {
+  if(confirm("तुम्हाला " + udise + " ही शाळा नोंदणी यादीतून डिलीट करायची आहे का?")) {
+    delete registeredSchools[udise];
+    delete registeredSchoolAddresses[udise];
+    delete registeredSchoolLimits[udise];
+    saveToLocalStorage();
+    updateSyncedSchoolsTable();
+  }
+}
+
+function updateSyncedSchoolsTable() {
+  var container = document.getElementById('registeredSchoolsTableList');
+  if(!container) return;
+  
+  var html = '<table style="width:100%; border-collapse:collapse; font-size:11px;">';
+  html += '<tr style="background:#e8f5e9;"><th>यु-डायस</th><th>शाळेचे नाव व पत्ता</th><th>मंजूर पट</th><th>क्रिया</th></tr>';
+  
+  var count = 0;
+  for(var u in registeredSchools) {
+    count++;
+    var addr = registeredSchoolAddresses[u] ? (" (" + registeredSchoolAddresses[u] + ")") : "";
+    html += '<tr style="border-bottom:1px solid #ddd;">';
+    html += '<td style="padding:4px; font-weight:bold;">' + u + '</td>';
+    html += '<td style="padding:4px;">' + registeredSchools[u] + addr + '</td>';
+    var lim = registeredSchoolLimits[u] || 50;
+    html += '<td style="padding:4px; text-align:center; font-weight:bold;">' + lim + ' विद्यार्थी</td>';
+    html += '<td style="padding:4px; text-align:center;"><button onclick="deleteSchool(\'' + u + '\')" style="background:#c62828; color:white; border:none; padding:2px 6px; font-size:10px; border-radius:3px; cursor:pointer;">🗑️ डिलीट</button></td>';
+    html += '</tr>';
+  }
+  html += '</table>';
+  if(count === 0) html = 'कोणतीही शाळा नोंदणीकृत नाही.';
+  container.innerHTML = html;
+}
+
+function saveToLocalStorage() {
+  try {
+    localStorage.setItem('hpc_registeredSchools', JSON.stringify(registeredSchools));
+    localStorage.setItem('hpc_registeredAddresses', JSON.stringify(registeredSchoolAddresses));
+    localStorage.setItem('hpc_registeredLimits', JSON.stringify(registeredSchoolLimits));
+    localStorage.setItem('hpc_activeSchoolLimit', activeSchoolLimit);
+    localStorage.setItem('hpc_schoolSettings', JSON.stringify(schoolSettings));
+    localStorage.setItem('hpc_students', JSON.stringify(students));
+    localStorage.setItem('hpc_remarkBanks', JSON.stringify(remarkBanks));
+  } catch(e) {}
+}
+
+function loadFromLocalStorage() {
+  try {
+    var s1 = localStorage.getItem('hpc_registeredSchools');
+    if(s1) registeredSchools = JSON.parse(s1);
+
+    var sa = localStorage.getItem('hpc_registeredAddresses');
+    if(sa) registeredSchoolAddresses = JSON.parse(sa);
+    var sl = localStorage.getItem('hpc_registeredLimits');
+    if(sl) registeredSchoolLimits = JSON.parse(sl);
+    var al = localStorage.getItem('hpc_activeSchoolLimit');
+    if(al) activeSchoolLimit = parseInt(al) || 50;
+
+    var s2 = localStorage.getItem('hpc_schoolSettings');
+    if(s2) schoolSettings = JSON.parse(s2);
+    if(!schoolSettings.name || schoolSettings.name.indexOf('महाबळेश्वर') !== -1) {
+      schoolSettings.name = "जि. प. प्राथमिक शाळा मुरूम शेंडा";
+      schoolSettings.address = "ता. मान, जि. सातारा";
+    }
+
+    var s3 = localStorage.getItem('hpc_students');
+    if(s3) students = JSON.parse(s3);
+
+    var s4 = localStorage.getItem('hpc_remarkBanks');
+    if(s4) remarkBanks = JSON.parse(s4);
+  } catch(e) {}
+}
+
+function populateDropdownOptions(gender) {
+  var bank = (gender === 'girl') ? remarkBanksGirl : remarkBanksBoy;
+  var fields = [
+    { id: 'db_self1', bank: bank.self },
+    { id: 'db_self2', bank: bank.self },
+    { id: 'db_peer1', bank: bank.peer },
+    { id: 'db_peer2', bank: bank.peer },
+    { id: 'db_parent1', bank: bank.parent },
+    { id: 'db_parent2', bank: bank.parent },
+    { id: 'db_teacher1', bank: bank.teacher },
+    { id: 'db_teacher2', bank: bank.teacher },
+    { id: 'db_finalEval', bank: bank.final }
+  ];
+
+  fields.forEach(function(f) {
+    var elem = document.getElementById(f.id);
+    if(!elem) return;
+    var currentVal = elem.value;
+    elem.innerHTML = '';
+    f.bank.forEach(function(rem) {
+      var opt = document.createElement('option');
+      opt.value = rem;
+      opt.textContent = rem;
+      elem.appendChild(opt);
+    });
+    var customOpt = document.createElement('option');
+    customOpt.value = "ADD_NEW_CUSTOM";
+    customOpt.textContent = "➕ [या यादीमध्ये नवीन शेरा जोडा...]";
+    elem.appendChild(customOpt);
+
+    if(currentVal && currentVal !== 'ADD_NEW_CUSTOM') {
+      elem.value = currentVal;
+    }
+  });
+}
+
+function checkCustomOption(elem) {
+  if(elem.value === "ADD_NEW_CUSTOM") {
+    var newRem = prompt("नवीन शेरा टाईप करा:");
+    if(newRem && newRem.trim()) {
+      var opt = document.createElement('option');
+      opt.value = newRem.trim();
+      opt.innerText = newRem.trim();
+      elem.insertBefore(opt, elem.lastChild);
+      elem.value = newRem.trim();
+    } else {
+      elem.selectedIndex = 0;
+    }
+  }
+}
+
+function buildTeacherMappingInputs() {
+  var grid = document.getElementById('teacherMappingGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  document.getElementById('sch_name').value = schoolSettings.name || "";
+  document.getElementById('sch_address').value = schoolSettings.address || "";
+
+  var previewEl = document.getElementById('sch_photo_preview');
+  if(previewEl) {
+    if(schoolSettings.photo) {
+      previewEl.innerHTML = '<img src="' + schoolSettings.photo + '" style="max-height: 60px; border-radius: 4px; border: 1.5px solid #1b5e20; vertical-align: middle;"> <button onclick="removeSchoolPhoto()" style="background: #c62828; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 11px; margin-left: 8px;">🗑️ फोटो काढा</button>';
+    } else {
+      previewEl.innerHTML = '<span style="font-size: 12px; color: #666; font-style: italic;">अद्याप फोटो निवडलेला नाही.</span>';
+    }
+  }
+
+  var availableClasses = ["इयत्ता पहिली", "इयत्ता दुसरी", "इयत्ता तिसरी", "इयत्ता चौथी", "इयत्ता पाचवी", "बालवाटिका/KG"];
+
+  schoolSettings.teachers.forEach(function(t, idx) {
+    var div = document.createElement('div');
+    div.className = 'form-group';
+    div.style.background = '#f9fbe7';
+    div.style.padding = '8px';
+    div.style.border = '1px solid #c0ca33';
+    div.style.borderRadius = '5px';
+
+    var classOptions = availableClasses.map(function(c) {
+      return '<option value="' + c + '" ' + (t.cls === c ? 'selected' : '') + '>' + c + '</option>';
+    }).join('');
+
+    div.innerHTML = `
+      <label style="color:#33691e;">शिक्षकाचा वर्ग / इयत्ता:</label>
+      <select id="sch_t_cls_${idx}" onchange="updateTeacherData(${idx})">
+        ${classOptions}
+      </select>
+      <label style="margin-top:4px;">शिक्षक नाव:</label>
+      <input type="text" id="sch_t_name_${idx}" value="${t.name || ''}" oninput="updateTeacherData(${idx})">
+      <label style="margin-top:4px;">शालार्थ आयडी:</label>
+      <input type="text" id="sch_t_sh_${idx}" value="${t.shalarth || ''}" oninput="updateTeacherData(${idx})">
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function updateTeacherData(idx) {
+  schoolSettings.teachers[idx].cls = document.getElementById(`sch_t_cls_${idx}`).value;
+  schoolSettings.teachers[idx].name = document.getElementById(`sch_t_name_${idx}`).value;
+  schoolSettings.teachers[idx].shalarth = document.getElementById(`sch_t_sh_${idx}`).value;
+  saveToLocalStorage();
+}
+
+
+function uploadSchoolPhoto(e) {
+  var file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 5 * 1024 * 1024) {
+    alert("⚠️ कृपया ५ MB पेक्षा लहान साईजचा फोटो निवडा!");
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(evt) {
+    schoolSettings.photo = evt.target.result;
+    saveToLocalStorage();
+    renderAll16Pages();
+    buildTeacherMappingInputs();
+    alert("✅ शाळेचा फोटो यशस्वीरीत्या अपलोड झाला व मुख्य पानावर जोडला गेला!");
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeSchoolPhoto() {
+  if(confirm("तुम्हाला शाळेचा फोटो काढून टाकायचा आहे का?")) {
+    schoolSettings.photo = "";
+    saveToLocalStorage();
+    renderAll16Pages();
+    buildTeacherMappingInputs();
+    alert("✅ शाळेचा फोटो काढून टाकला आहे.");
+  }
+}
+
+function saveSchoolSettings() {
+  if(isDemoLocked) {
+    alert("🔒 हे प्रातिनिधिक डेमो व्हर्जन असल्यामुळे शाळेचे नाव लॉक केले आहे.\n\nनाव बदलण्यासाठी पांडुरंग यादव सरांकडून ॲडमिन कोड मिळवून होम पेजवरून अनलॉक करा.");
+    document.getElementById('sch_name').value = schoolSettings.name;
+    document.getElementById('sch_address').value = schoolSettings.address;
+    return;
+  }
+  schoolSettings.name = document.getElementById('sch_name').value;
+  schoolSettings.address = document.getElementById('sch_address').value;
+  saveToLocalStorage();
+  alert("✅ शाळा माहिती यशस्वीरीत्या सेव्ह झाली!");
+}
+
+function getTeacherForClass(clsName) {
+  if(!clsName) return schoolSettings.teachers[0] || { name: "वर्गशिक्षक", shalarth: "TCH1001" };
+  var target = String(clsName).trim().toLowerCase();
+  for(var i = 0; i < schoolSettings.teachers.length; i++) {
+    var t = schoolSettings.teachers[i];
+    if(t && t.cls) {
+      var tCls = String(t.cls).trim().toLowerCase();
+      if(tCls === target || tCls.indexOf(target) !== -1 || target.indexOf(tCls) !== -1) {
+        return t;
+      }
+    }
+  }
+  return schoolSettings.teachers[0] || { name: "वर्गशिक्षक", shalarth: "TCH1001" };
+}
+
+
+// Official Domain Options Bank
+var domainOptionBanks = {
+  d1: {
+    act: ["उपक्रम: शरीराच्या भागांची ओळख व शारीरिक हालचाल (चालणे, धावणे, उडी मारणे).", "उपक्रम: आहार, आरोग्य व स्वच्छतेच्या सवयी (हात धुणे, दात घासणे).", "उपक्रम: धावणे, लंगडी व बॉल फेकून पकडण्याचा खेळ.", "उपक्रम: योगासने व शारीरिक कसरत."],
+    self: ["मी दररोज खेळायला व पळायला येतो/येते.", "मी स्वतःचे हात स्वच्छ धुतो/धुते.", "मी आजारी पडू नये म्हणून स्वच्छ राहतो/राहते.", "मी खेळात कधीही पडत नाही."],
+    peer: ["हा/ही खेळात सर्वांना सोबत घेतो/घेते.", "हा/ही चपळतेने खेळतो/खेळते आणि मदत करतो/करते.", "हा/ही सर्व खेळांमध्ये आघाडीवर असतो/असते.", "हा/ही पळण्याच्या स्पर्धेत वेगाने पळतो/पळते."],
+    parent: ["शाळेत जायला व खेळायला खूप उत्सुक असतो/असते.", "घरी आहाराच्या चांगल्या सवयी पाळतो/पाळते.", "रोज वेळेवर झोपतो/झोपते आणि उठतो/उठते.", "घरी स्वच्छतेची काळजी घेतो/घेते."],
+    teacher: ["शारीरिक संतुलन, स्नायूंचे नियंत्रण सुधारते व चपळता येते.", "आरोग्य व स्वच्छतेच्या सवयी अंगवळणी पडल्या आहेत.", "शारीरिक क्रिया व खेळांमध्ये उत्तम सहभाग आहे.", "ज्ञानेंद्रियांच्या संवेदना व हालचालींत चांगला समन्वय आहे."]
+  },
+  d2: {
+    act: ["उपक्रम: भावनांची अभिव्यक्ती व मित्र-मैत्रिणींशी संबंध (खेळणी वाटून घेणे).", "उपक्रम: संवाद कौशल्य व जबाबदारीची जाणीव (वस्तू जागेवर ठेवणे).", "उपक्रम: गटात काम करणे व एकमेकांना मदत करणे.", "उपक्रम: निसर्ग निरीक्षण व वनस्पतींची काळजी घेणे."],
+    self: ["मी वर्गमित्रांशी आवडीने खेळणी व खाऊ शेअर करतो/करते.", "मी सर्वांशी प्रेमाने व आदराने बोलतो/बोलते.", "मी कोणाशीही भांडण करत नाही.", "मी माझ्या वस्तूंची काळजी घेतो/घेते."],
+    peer: ["हा/ही सर्वांशी मैत्रीपूर्ण वागतो/वागते.", "हा/ही अडचणीत असलेल्या सहकाऱ्याला मदत करतो/करते.", "हा/ही गटात काम करताना सर्वांचे ऐकतो/ऐकते.", "हा/ही सर्वांना हसवतो/हसवत राहतो/राहते."],
+    parent: ["शाळेतील मित्र-मैत्रिणींबद्दल घरी आवडीने सांगतो/सांगते.", "घरातील सदस्यांचा आदर करतो/करते.", "इतरांना मदत करण्याची वृत्ती आहे.", "रागावर नियंत्रण ठेवण्याचा प्रयत्न करतो/करते."],
+    teacher: ["भावनिक बुद्धिमत्ता (EQ) वाढते व सहकार्याची भावना दृढ होते.", "उत्तम श्रोता होण्याची सवय लागते व जबाबदारीने वागतो/वागते.", "सामाजिक सलोखा व सहानुभूतीची जाणीव विकसित होत आहे.", "शालेय नियमांचे मनःपूर्वक पालन करतो/करते."]
+  },
+  d3: {
+    act: ["उपक्रम: चित्र निरीक्षण व कारण-परिणाम चर्चा ('पाऊस आला तर काय करतो?').", "उपक्रम: संख्या मोजणी (१ ते १०) व जिगसॉ कोडी सोडवणे.", "उपक्रम: आकार, रंग व वजन यानुसार वस्तूंचे वर्गीकरण करणे.", "उपक्रम: निसर्ग निरीक्षण व परिसर अभ्यास संवाद."],
+    self: ["मी कोडी आणि चित्रे सहज ओळखतो/ओळखते.", "मी १ ते ५० अंक अचूक मोजतो/मोजते.", "मी नवीन वस्तू पाहून प्रश्न विचारतो/विचारते.", "मी गणितीय खेळ आवडीने खेळतो/खेळते."],
+    peer: ["हा/ही कोडी पटकन सोडवतो/सोडवते.", "हा/ही गणितातील मोजणीत मदत करतो/करते.", "हा/ही नवीन गोष्टींचे अचूक निरीक्षण करतो/करते.", "हा/ही सर्व खेळात डोके चालवतो/चालवते."],
+    parent: ["घरातील वस्तू मोजून दाखवतो/दाखवते.", "परिसरातील घटकांबद्दल कुतूहलाने प्रश्न विचारतो/विचारते.", "तारखा व अंक ओळखतो/ओळखते.", "तार्किक विचार करून उत्तरे देतो/देते."],
+    teacher: ["निरीक्षण शक्ती, एकाग्रता व तार्किक विचार क्षमता वाढते.", "गणिताची प्राथमिक बैठक पक्की होते व समस्या निवारण कौशल्य वाढते.", "कार्याकारणभाव समजून घेण्याची क्षमता उत्तम आहे.", "नवीन संकल्पना जलद गतीने आत्मसात करतो/करते."]
+  },
+  d4: {
+    act: ["उपक्रम: चित्रवाचन व श्रवण कौशल्य (गोष्ट ऐकून पात्रे लक्षात ठेवणे).", "उपक्रम: नाट्य/अभिनय व स्व-परिचय (कुटुंबाबद्दल बोलणे).", "उपक्रम: अक्षर ओळख, शब्द वाचन व बडबडगीते.", "उपक्रम: गोष्टींची पुस्तके वाचणे व कथा सांगणे."],
+    self: ["मी मोठ्याने छान गोष्टी सांगतो/सांगते.", "मी पुस्तकातील चित्रे पाहून गोष्ट सांगतो/सांगते.", "मी माझी आवडती कविता म्हणतो/म्हणते.", "मी माझे नाव व अक्षरे छान लिहितो/लिहिते."],
+    peer: ["याची/ह्याची गोष्ट ऐकायला खूप आवडते.", "हा/ही सुंदर कविता म्हणतो/म्हणते.", "हा/ही स्पष्ट उच्चारात बोलतो/बोलते.", "हा/ही पुस्तके आवडीने वाचतो/वाचते."],
+    parent: ["घरी रोज मोठ्याने वाचनाचा सराव करतो/करते.", "शाळेत शिकलेली गाणी घरी गाऊन दाखवतो/दाखवते.", "नवीन शब्द विचारतो/विचारते.", "स्वतःहून वाचनाची आवड दर्शवतो/दर्शवते."],
+    teacher: ["कल्पनाशक्तीचा विकास होऊन स्वतःच्या शब्दांत विचार मांडण्याची क्षमता येते.", "रंगमंचीय धाडस वाढते, उच्चार स्पष्ट होतात व आत्मविश्वास दुणावतो.", "वाचन व लेखनाची गती आणि शुद्धता सुधारत आहे.", "प्रभावी संवाद कौशल्य व शब्दसंग्रह वाढला आहे."]
+  },
+  d5: {
+    act: ["उपक्रम: चित्रकला कार्यशाळा व हस्तकला (कागदकाम, मातीकाम).", "उपक्रम: नृत्य कौशल्य (तालावर हालचाली) व निसर्ग सौंदर्य निरीक्षण.", "उपक्रम: टाकाऊतून टिकाऊ वस्तू बनवणे.", "उपक्रम: समूहगीत व सांस्कृतिक कार्यक्रम सहभाग."],
+    self: ["मला सुंदर चित्रे काढायला व रंगवायला आवडते.", "मला गाण्यावर नाचायला आवडते.", "मी कागदाच्या सुंदर वस्तू बनवतो/बनवते.", "मला मातीची खेळणी बनवायला आवडते."],
+    peer: ["हा/ही खूप सुंदर चित्रे काढतो/काढते.", "हा/ही छान गाणी गातो/गाते आणि नाचतो/नाचते.", "हा/ही हस्तकलेत खूप हुशार आहे.", "हा/ही सर्वांना रांगोळी व चित्रकलेत मदत करतो/करते."],
+    parent: ["घरी कागदाची व मातीची खेळणी बनवतो/बनवते.", "घरातील वस्तू नीटनेटक्या सजवून ठेवतो/ठेवते.", "संगीताची व नृत्याची आवड आहे.", "कलेचा आनंद मनःपूर्वक घेतो/घेते."],
+    teacher: ["सौंदर्यदृष्टीचा विकास व बोटांच्या स्नायूंचे नियंत्रण वाढते.", "शारीरिक लवचिकता वाढून मनाला उत्साह व आनंद मिळतो.", "सर्जनशीलता व कलात्मक अभिव्यक्ती उत्तम आहे.", "स्थानिक संस्कृती आणि कलेचा आदर करतो/करते."]
+  },
+  d6: {
+    act: ["उपक्रम: एकाग्रता वाढवणे व कुतूहल/शोध (प्रश्न विचारणे).", "उपक्रम: नियोजन कौशल्य व चुकांमधून शिकणे (वस्तू जागेवर ठेवणे).", "उपक्रम: अभ्यासाची वेळ पाळणे व स्वाध्याय पूर्ण करणे.", "उपक्रम: वर्गखोलीतील नियम मनःपूर्वक पाळणे."],
+    self: ["मी माझा अभ्यास स्वतः वेळेवर पूर्ण करतो/करते.", "मी माझ्या वस्तू जागेवर नीट ठेवतो/ठेवते.", "मी शिक्षकांनी दिलेला गृहपाठ रोज करतो/करते.", "मी वर्गात शांतपणे लक्ष देऊन ऐकतो/ऐकते."],
+    peer: ["हा/ही नेहमी आपला अभ्यास वेळेत पूर्ण करतो/करते.", "हा/ही दप्तर व वह्या स्वच्छ ठेवतो/ठेवते.", "हा/ही अभ्यासात कधीही आळस करत नाही.", "हा/ही नियमांचे तंतोतंत पालन करतो/करते."],
+    parent: ["घरी रोज ठराविक वेळी अभ्यासाला बसतो/बसते.", "आपल्या वस्तू आणि दप्तर स्वतः आवसून ठेवतो/ठेवते.", "अभ्यासाबाबत स्वयं-शिस्त आहे.", "न खचता सतत प्रयत्न करण्याची वृत्ती आहे."],
+    teacher: ["कोणतेही काम न विचलित होता पूर्ण करण्याची सकारात्मक सवय लागते.", "वेळेचे व्यवस्थापन येते व न खचता प्रयत्नशील राहण्याचा दृष्टिकोन बनतो.", "स्वयंशिक्षणाची व अभ्यासाची उत्तम सवय विकसित झाली आहे.", "उत्कृष्ट अवधान व सकारात्मक अध्ययन वृत्ती आहे."]
+  }
+};
+
+function getDomainBaseKey(dId) {
+  if(dId.indexOf('d1_') !== -1) return 'd1';
+  if(dId.indexOf('d2_') !== -1) return 'd2';
+  if(dId.indexOf('d3_') !== -1) return 'd3';
+  if(dId.indexOf('d4_') !== -1) return 'd4';
+  if(dId.indexOf('d5_') !== -1) return 'd5';
+  return 'd6';
+}
+
+function checkDomainCustomOption(type) {
+  var sel = document.getElementById('db_dom_' + type + '_sel');
+  var customInp = document.getElementById('db_dom_' + type + '_custom');
+  if(!sel || !customInp) return;
+  if(sel.value === 'CUSTOM') {
+    customInp.style.display = 'block';
+  } else {
+    customInp.style.display = 'none';
+  }
+  saveActiveDomainData();
+}
+
+function onDomainChangeInForm() {
+  saveActiveDomainData();
+  loadActiveDomainDataToForm();
+}
+
+function loadActiveDomainDataToForm() {
+  var s = students[currentIndex];
+  if(!s) return;
+  if(!s.domainData) s.domainData = {};
+
+  var dSelector = document.getElementById('db_domain_selector');
+  if(!dSelector) return;
+  var activeDId = dSelector.value || 'd1_t1';
+
+  var currentClass = document.getElementById('db_class') ? document.getElementById('db_class').value : 'इयत्ता पहिली';
+  var domainsConfig = getDomainsConfigForClass(currentClass);
+  var currentDConfig = domainsConfig.find(function(item) { return item.id === activeDId; }) || domainsConfig[0];
+
+  var titleEl = document.getElementById('activeDomainCardTitle');
+  if(titleEl) {
+    titleEl.innerText = "📌 " + currentDConfig.title + " (स्वायत्त मूल्यमापन)";
+  }
+
+  var dData = s.domainData[activeDId] || {};
+  if(!s.levels) s.levels = {};
+
+  // Load Levels & Remarks
+  ['a1', 'a2', 'a3'].forEach(function(aKey) {
+    var lvlVal = dData[aKey] || (s.levels ? s.levels[activeDId + '_' + aKey] : 'पर्वत') || 'पर्वत';
+    var lvlEl = document.getElementById('db_dom_lvl_' + aKey);
+    if(lvlEl) lvlEl.value = lvlVal;
+
+    updateLevelRemarkDropdown(aKey);
+
+    var savedRem = (dData.rem && dData.rem[aKey]) ? dData.rem[aKey] : (s.levelRemarks ? s.levelRemarks[activeDId + '_' + aKey] : '');
+    var remSel = document.getElementById('db_dom_rem_' + aKey + '_sel');
+    var remCustom = document.getElementById('db_dom_rem_' + aKey + '_custom');
+
+    if(remSel && remCustom) {
+      if(!savedRem) {
+        remSel.selectedIndex = 0;
+        remCustom.style.display = 'none';
+      } else {
+        var foundIndex = -1;
+        for(var i = 0; i < remSel.options.length; i++) {
+          if(remSel.options[i].value === savedRem) {
+            foundIndex = i;
+            break;
+          }
+        }
+        if(foundIndex !== -1) {
+          remSel.selectedIndex = foundIndex;
+          remCustom.style.display = 'none';
+        } else {
+          remSel.value = 'CUSTOM';
+          remCustom.value = savedRem;
+          remCustom.style.display = 'block';
+        }
+      }
+    }
+  });
+
+  var baseKey = getDomainBaseKey(activeDId);
+  var bank = domainOptionBanks[baseKey] || domainOptionBanks.d1;
+
+  var isTerm1 = activeDId.indexOf('_t1') !== -1;
+
+  // Load Dropdowns
+  var fields = [
+    { type: 'act', defaultVal: currentDConfig.act, options: bank.act },
+    { type: 'self', defaultVal: isTerm1 ? (s.self1 || bank.self[0]) : (s.self2 || bank.self[1]), options: bank.self },
+    { type: 'peer', defaultVal: isTerm1 ? (s.peer1 || bank.peer[0]) : (s.peer2 || bank.peer[1]), options: bank.peer },
+    { type: 'parent', defaultVal: isTerm1 ? (s.parent1 || bank.parent[0]) : (s.parent2 || bank.parent[1]), options: bank.parent },
+    { type: 'teacher', defaultVal: isTerm1 ? (s.teacher1 || bank.teacher[0]) : (s.teacher2 || bank.teacher[1]), options: bank.teacher }
+  ];
+
+  fields.forEach(function(f) {
+    var sel = document.getElementById('db_dom_' + f.type + '_sel');
+    var customInp = document.getElementById('db_dom_' + f.type + '_custom');
+    if(!sel || !customInp) return;
+
+    var val = dData[f.type] || f.defaultVal || f.options[0];
+
+    sel.innerHTML = '';
+    var matched = false;
+    f.options.forEach(function(optText) {
+      var opt = document.createElement('option');
+      opt.value = optText;
+      opt.innerText = optText;
+      if(optText === val) matched = true;
+      sel.appendChild(opt);
+    });
+
+    var customOpt = document.createElement('option');
+    customOpt.value = 'CUSTOM';
+    customOpt.innerText = '✍️ स्वतःचा मसुदा टाईप करा (Custom)...';
+    sel.appendChild(customOpt);
+
+    if(matched) {
+      sel.value = val;
+      customInp.style.display = 'none';
+      customInp.value = '';
+    } else {
+      sel.value = 'CUSTOM';
+      customInp.style.display = 'block';
+      customInp.value = val;
+    }
+  });
+}
+
+function saveActiveDomainData() {
+  var s = students[currentIndex];
+  if(!s) return;
+  if(!s.domainData) s.domainData = {};
+  if(!s.levels) s.levels = {};
+
+  var dSelector = document.getElementById('db_domain_selector');
+  if(!dSelector) return;
+  var activeDId = dSelector.value || 'd1_t1';
+
+  if(!s.levelRemarks) s.levelRemarks = {};
+
+  var remData = {};
+  ['a1', 'a2', 'a3'].forEach(function(aKey) {
+    var lvlEl = document.getElementById('db_dom_lvl_' + aKey);
+    var lvlVal = lvlEl ? lvlEl.value : 'पर्वत';
+    s.levels[activeDId + '_' + aKey] = lvlVal;
+
+    var remSel = document.getElementById('db_dom_rem_' + aKey + '_sel');
+    var remCustom = document.getElementById('db_dom_rem_' + aKey + '_custom');
+    var remVal = '';
+    if(remSel) {
+      if(remSel.value === 'CUSTOM') {
+        remVal = remCustom ? remCustom.value : '';
+      } else {
+        remVal = remSel.value;
+      }
+    }
+    s.levelRemarks[activeDId + '_' + aKey] = remVal;
+    remData[aKey] = remVal;
+  });
+
+  var a1 = s.levels[activeDId + '_a1'];
+  var a2 = s.levels[activeDId + '_a2'];
+  var a3 = s.levels[activeDId + '_a3'];
+
+  function getFieldValue(type) {
+    var sel = document.getElementById('db_dom_' + type + '_sel');
+    var customInp = document.getElementById('db_dom_' + type + '_custom');
+    if(!sel) return '';
+    if(sel.value === 'CUSTOM') {
+      return customInp ? customInp.value : '';
+    }
+    return sel.value;
+  }
+
+  s.domainData[activeDId] = {
+    a1: a1,
+    a2: a2,
+    a3: a3,
+    rem: remData,
+    act: getFieldValue('act'),
+    self: getFieldValue('self'),
+    peer: getFieldValue('peer'),
+    parent: getFieldValue('parent'),
+    teacher: getFieldValue('teacher')
+  };
+
+  saveToLocalStorage();
+}
+
+function buildDomainLevelForm() {
+  var grid = document.getElementById('domainLevelFormGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  var currentClass = document.getElementById('db_class') ? document.getElementById('db_class').value : 'इयत्ता पहिली';
+  var domainsConfig = getDomainsConfigForClass(currentClass);
+
+  domainsConfig.forEach(function(d) {
+    ['a1', 'a2', 'a3'].forEach(function(aKey, idx) {
+      var aspectName = idx === 0 ? "जाणीव जागृती" : (idx === 1 ? "संवेदनशीलता" : "सर्जनशीलता व कल्पकता");
+      var key = `${d.id}_${aKey}`;
+      var div = document.createElement('div');
+      div.className = 'form-group';
+      div.innerHTML = `
+        <label>${d.title.split(':')[0]} - ${aspectName}:</label>
+        <select id="db_lvl_${key}">
+          <option value="निर्झर/प्रवाह">निर्झर / प्रवाह (Beginning)</option>
+          <option value="पर्वत">पर्वत (Developing)</option>
+          <option value="आकाश">आकाश (Advanced)</option>
+        </select>
+      `;
+      grid.appendChild(div);
+    });
+  });
+}
+
+function calcAttendance() {
+  var s = students[currentIndex];
+  if(!s.att) s.att = {};
+
+  var months = ['jun', 'jul', 'aug', 'sep', 'oct', 'dec', 'jan', 'feb', 'mar', 'apr'];
+  months.forEach(function(m) {
+    var w = parseInt(document.getElementById(`att_w_${m}`).value) || 0;
+    var p = parseInt(document.getElementById(`att_p_${m}`).value) || 0;
+    s.att[`w_${m}`] = w;
+    s.att[`p_${m}`] = p;
+
+    var pct = w > 0 ? Math.round((p / w) * 100) : 0;
+    var el = document.getElementById(`att_pct_${m}`);
+    if(el) el.innerText = w > 0 ? pct + "%" : "-";
+  });
+}
+
+function onGenderChangeInForm() {
+  var g = document.getElementById('db_gender').value;
+  var nameInput = document.getElementById('db_name');
+  if(nameInput && (nameInput.value.indexOf('नवीन विद्यार्थी') !== -1 || nameInput.value.indexOf('नवीन विद्यार्थिनी') !== -1 || !nameInput.value)) {
+    nameInput.value = (g === 'girl') ? 'नवीन विद्यार्थिनी (मुलगी)' : 'नवीन विद्यार्थी (मुलगा)';
+  }
+  populateDropdownOptions(g);
+  var s = students[currentIndex];
+  if(s) {
+    s.gender = g;
+    s.name = nameInput ? nameInput.value : s.name;
+    var bank = (g === 'girl') ? remarkBanksGirl : remarkBanksBoy;
+    document.getElementById('db_self1').value = bank.self[0];
+    document.getElementById('db_self2').value = bank.self[1];
+    document.getElementById('db_peer1').value = bank.peer[0];
+    document.getElementById('db_peer2').value = bank.peer[1];
+    document.getElementById('db_parent1').value = bank.parent[0];
+    document.getElementById('db_parent2').value = bank.parent[1];
+    document.getElementById('db_teacher1').value = bank.teacher[0];
+    document.getElementById('db_teacher2').value = bank.teacher[1];
+    document.getElementById('db_finalEval').value = bank.final[0];
+  }
+}
+
+function loadStudentToForm() {
+  setTimeout(loadActiveDomainDataToForm, 50);
+  var s = students[currentIndex];
+  if(!s) return;
+
+  document.getElementById('db_roll').value = s.roll || 1;
+  document.getElementById('db_name').value = s.name || "";
+  document.getElementById('db_father').value = s.father || "";
+  document.getElementById('db_mother').value = s.mother || "";
+  document.getElementById('db_gender').value = s.gender || "boy";
+  populateDropdownOptions(s.gender || "boy");
+  document.getElementById('db_class').value = s.cls || "इयत्ता पहिली";
+  var currentTeacher = getTeacherForClass(s.cls || "इयत्ता पहिली");
+  var teacherEl = document.getElementById('db_teacher_indicator');
+  if(teacherEl) {
+    teacherEl.innerText = "👨‍🏫 या इयत्तेचे वर्गशिक्षक: " + currentTeacher.name + " (शालार्थ ID: " + (currentTeacher.shalarth || '-') + ")";
+  }
+  document.getElementById('db_gr').value = s.gr || "";
+  document.getElementById('db_dob').value = s.dob || "";
+  document.getElementById('db_aadhaar').value = s.aadhaar || "";
+
+  document.getElementById('db_hobbies').value = (s.hobbies || []).join(', ');
+  document.getElementById('db_favColor').value = s.favColor || "";
+  document.getElementById('db_favFlower').value = s.favFlower || "";
+  document.getElementById('db_favFood').value = s.favFood || "";
+  document.getElementById('db_favSport').value = s.favSport || "";
+  document.getElementById('db_favAnimal').value = s.favAnimal || "";
+  document.getElementById('db_favSubject').value = s.favSubject || "";
+  document.getElementById('db_aim').value = s.aim || "";
+  document.getElementById('db_friends').value = s.friends || "";
+
+  document.getElementById('db_h1').value = s.h1 || "";
+  document.getElementById('db_h2').value = s.h2 || "";
+  document.getElementById('db_w1').value = s.w1 || "";
+  document.getElementById('db_w2').value = s.w2 || "";
+
+  var months = ['jun', 'jul', 'aug', 'sep', 'oct', 'dec', 'jan', 'feb', 'mar', 'apr'];
+  if(!s.att) s.att = {};
+  months.forEach(function(m) {
+    document.getElementById(`att_w_${m}`).value = s.att[`w_${m}`] || "";
+    document.getElementById(`att_p_${m}`).value = s.att[`p_${m}`] || "";
+  });
+  calcAttendance();
+
+  document.getElementById('db_self1').value = s.self1 || remarkBanks.self[0];
+  document.getElementById('db_self2').value = s.self2 || remarkBanks.self[1];
+  document.getElementById('db_peer1').value = s.peer1 || remarkBanks.peer[0];
+  document.getElementById('db_peer2').value = s.peer2 || remarkBanks.peer[1];
+  document.getElementById('db_parent1').value = s.parent1 || remarkBanks.parent[0];
+  document.getElementById('db_parent2').value = s.parent2 || remarkBanks.parent[1];
+  document.getElementById('db_teacher1').value = s.teacher1 || remarkBanks.teacher[0];
+  document.getElementById('db_teacher2').value = s.teacher2 || remarkBanks.teacher[1];
+  document.getElementById('db_finalEval').value = s.finalEval || remarkBanks.final[0];
+
+  domainsConfig.forEach(function(d) {
+    ['a1', 'a2', 'a3'].forEach(function(aKey) {
+      var key = `${d.id}_${aKey}`;
+      var elem = document.getElementById(`db_lvl_${key}`);
+      if(elem && s.levels && s.levels[key]) {
+        elem.value = s.levels[key];
+      }
+    });
+  });
+}
+
+function saveCurrentStudentData() {
+  var s = students[currentIndex];
+  if(!s) {
+    s = {};
+    students[currentIndex] = s;
+  }
+
+  s.roll = document.getElementById('db_roll').value;
+  s.name = document.getElementById('db_name').value;
+  s.father = document.getElementById('db_father').value;
+  s.mother = document.getElementById('db_mother').value;
+  s.gender = document.getElementById('db_gender').value;
+  s.cls = document.getElementById('db_class').value;
+  s.gr = document.getElementById('db_gr').value;
+  s.dob = document.getElementById('db_dob').value;
+  s.aadhaar = document.getElementById('db_aadhaar').value;
+
+  var hobbiesInput = document.getElementById('db_hobbies').value;
+  s.hobbies = hobbiesInput ? hobbiesInput.split(',').map(function(item) { return item.trim(); }).filter(Boolean) : [];
+  s.favColor = document.getElementById('db_favColor').value;
+  s.favFlower = document.getElementById('db_favFlower').value;
+  s.favFood = document.getElementById('db_favFood').value;
+  s.favSport = document.getElementById('db_favSport').value;
+  s.favAnimal = document.getElementById('db_favAnimal').value;
+  s.favSubject = document.getElementById('db_favSubject').value;
+  s.aim = document.getElementById('db_aim').value;
+  s.friends = document.getElementById('db_friends').value;
+
+  s.h1 = document.getElementById('db_h1').value;
+  s.h2 = document.getElementById('db_h2').value;
+  s.w1 = document.getElementById('db_w1').value;
+  s.w2 = document.getElementById('db_w2').value;
+
+  calcAttendance();
+
+  s.self1 = document.getElementById('db_self1').value;
+  s.self2 = document.getElementById('db_self2').value;
+  s.peer1 = document.getElementById('db_peer1').value;
+  s.peer2 = document.getElementById('db_peer2').value;
+  s.parent1 = document.getElementById('db_parent1').value;
+  s.parent2 = document.getElementById('db_parent2').value;
+  s.teacher1 = document.getElementById('db_teacher1').value;
+  s.teacher2 = document.getElementById('db_teacher2').value;
+  s.finalEval = document.getElementById('db_finalEval').value;
+
+  if(!s.levels) s.levels = {};
+  domainsConfig.forEach(function(d) {
+    ['a1', 'a2', 'a3'].forEach(function(aKey) {
+      var key = `${d.id}_${aKey}`;
+      var elem = document.getElementById(`db_lvl_${key}`);
+      if(elem) {
+        s.levels[key] = elem.value;
+      }
+    });
+  });
+
+  saveToLocalStorage();
+  updateStudentSelectDropdown();
+  renderAll16Pages();
+  alert("✅ विद्यार्थी माहिती सेव्ह झाली!");
+}
+
+
+function deleteCurrentStudent() {
+  var s = students[currentIndex];
+  if(!s) return;
+  
+  var confirmText = "❓ तुम्हाला '" + s.name + "' (हजेरी क्र. " + (s.roll || '-') + ") या विद्यार्थ्याची संपूर्ण माहिती डेटाबेसधून नक्की हटवायची (Delete करायची) आहे का?\n\n'होय / OK' वर क्लिक केल्यास माहिती पूर्णपणे डिलीट होईल.";
+  
+  if(confirm(confirmText)) {
+    var deletedName = s.name;
+    students.splice(currentIndex, 1);
+    
+    if(students.length === 0) {
+      addNewBlankStudent();
+    } else {
+      currentIndex = Math.max(0, Math.min(currentIndex, students.length - 1));
+      saveToLocalStorage();
+      updateStudentSelectDropdown();
+      loadStudentToForm();
+      renderAll16Pages();
+    }
+    alert("✅ '" + deletedName + "' या विद्यार्थ्याची माहिती डेटाबेसधून यशस्वीरीत्या डिलीट करण्यात आली आहे!");
+  }
+}
+
+
+
+function addNewBlankStudent() {
+  if(activeSchoolUdise && registeredSchoolLimits[activeSchoolUdise]) {
+    activeSchoolLimit = registeredSchoolLimits[activeSchoolUdise];
+  }
+  var limit = activeSchoolLimit || 50;
+  if(students.length >= limit) {
+    alert("🛑 तुमच्या शाळेचा मंजूर पट (" + limit + " विद्यार्थी) पूर्ण झाला आहे!\n\nअतिरिक्त विद्यार्थी जोडण्यासाठी वर्गणी वाढवून पट अद्ययावत करून घ्या.\nसंपर्क: यादव सर (मोबाईल: 9422974772)");
+    return;
+  }
+  var newStud = {
+    roll: students.length + 1,
+    name: "नवीन विद्यार्थी (मुलगा)",
+    gender: "boy",
+    cls: "इयत्ता पहिली",
+    father: "", mother: "", gr: "", dob: "", aadhaar: "",
+    h1: "", h2: "", w1: "", w2: "",
+    att: {}, levels: {},
+    self1: remarkBanksBoy.self[0], self2: remarkBanksBoy.self[1],
+    peer1: remarkBanksBoy.peer[0], peer2: remarkBanksBoy.peer[1],
+    parent1: remarkBanksBoy.parent[0], parent2: remarkBanksBoy.parent[1],
+    teacher1: remarkBanksBoy.teacher[0], teacher2: remarkBanksBoy.teacher[1],
+    finalEval: remarkBanksBoy.final[0]
+  };
+  students.push(newStud);
+  currentIndex = students.length - 1;
+  saveToLocalStorage();
+  updateStudentSelectDropdown();
+  loadStudentToForm();
+  renderAll16Pages();
+  alert("➕ नवीन कोरा विद्यार्थी फॉर्म तयार झाला आहे!");
+}
+
+
+
+function onStudentChange() {
+  var sel = document.getElementById('studentSelect');
+  if(sel) {
+    currentIndex = parseInt(sel.value) || 0;
+    var dbSel = document.getElementById('dbStudentSelect');
+    if(dbSel) dbSel.value = currentIndex;
+    var repSel = document.getElementById('reportStudentSelect');
+    if(repSel) repSel.value = currentIndex;
+    loadStudentToForm();
+    renderAll16Pages();
+    var delBtn = document.getElementById('dbDeleteBtn');
+    if(delBtn && students[currentIndex]) {
+      delBtn.innerText = "🗑️ '" + students[currentIndex].name + "' हटवा";
+    }
+  }
+}
+
+function onClassChangeInForm() {
+  var chosenClass = document.getElementById('db_class').value;
+  if(students[currentIndex]) {
+    students[currentIndex].cls = chosenClass;
+  }
+  var teacher = getTeacherForClass(chosenClass);
+  var teacherEl = document.getElementById('db_teacher_indicator');
+  if(teacherEl) {
+    teacherEl.innerText = "👨‍🏫 या इयत्तेचे वर्गशिक्षक: " + teacher.name + " (शालार्थ ID: " + (teacher.shalarth || '-') + ")";
+  }
+  renderAll16Pages();
+  saveToLocalStorage();
+}
+
+// -------------------------------------------------------------
+// RENDER ALL 16 A5 PAGES (PAGE 0 TO PAGE 15)
+// -------------------------------------------------------------
+
+function triggerA4PdfPrint() {
+  switchTab('reportView');
+  if(typeof loadStudentToForm === 'function') loadStudentToForm();
+  renderAll16Pages();
+  setTimeout(function() {
+    window.print();
+  }, 300);
+}
+
+function renderAll16Pages() {
+  var s = students[currentIndex] || students[0];
+  var domainsConfig = getDomainsConfigForClass(s.cls || "इयत्ता पहिली");
+  var teacher = getTeacherForClass(s.cls || "इयत्ता पहिली");
+  var container = document.getElementById('pagesContainer');
+  if(!container) return;
+  container.innerHTML = '';
+
+  var schName = schoolSettings.name || "जि. प. प्राथमिक शाळा";
+  var schAddr = schoolSettings.address || "";
+
+  // 1. COVER PAGE (PAGE 0)
+  var schoolPhotoHtml = schoolSettings.photo ? `
+    <div style="text-align: center; margin: 6px 0 10px 0;">
+      <img src="${schoolSettings.photo}" style="max-height: 55mm; max-width: 98%; border: 2.5px solid #1b5e20; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.18); object-fit: cover;">
+    </div>
+  ` : `
+    <div style="border: 2px dashed #1b5e20; background: rgba(255,255,255,0.92); padding: 12px; text-align: center; border-radius: 8px; margin: 6px 0 10px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+      <span style="font-size: 28px;">🏫 🏛️</span>
+      <div style="font-size: 12.5px; font-weight: bold; color: #1b5e20; margin-top: 4px;">शाळेचा फोटो (शाळा व शिक्षक माहिती टॅबमधून अपलोड करा)</div>
+    </div>
+  `;
+
+  var coverHtml = `
+    <div class="a5-page cover-page">
+      <!-- HEADER WITH SOLID WHITE BACKDROP BEHIND SCHOOL NAME -->
+      <div class="header-box" style="background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #1b5e20; border-radius: 8px; padding: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.12); text-align: center; margin-bottom: 6px;">
+        <h2 style="margin: 0; color: #1b5e20; font-size: 14px; font-weight: bold;">🌿 महाराष्ट्र शासन - शालेय शिक्षण विभाग 🌿</h2>
+        <h3 style="margin: 2px 0 0 0; color: #e65100; font-size: 12px; font-weight: bold;">समग्र प्रगतिपत्रक (HPC) - पायाभूत स्तर (A4 बुकレット)</h3>
+        <div style="border-top: 1.5px dashed #2e7d32; margin: 6px 0 5px 0;"></div>
+        <div style="font-size: 18px; font-weight: bold; color: #1b5e20; letter-spacing: 0.3px;">${schName}</div>
+        <div style="font-size: 11.5px; color: #37474f; font-weight: 600; margin-top: 2px;">${schAddr}</div>
+      </div>
+
+      <!-- SCHOOL PHOTO AREA -->
+      ${schoolPhotoHtml}
+
+      <!-- Passport Size Photo Frames (Moved lower) -->
+      <div class="photo-frame-container" style="margin: 8px 0 10px 0;">
+        <div class="photo-frame-box">
+          <span class="photo-icon">👦/👧</span>
+          <span class="photo-label">विद्यार्थ्याचा फोटो<br>(पासपोर्ट साईज)</span>
+        </div>
+        <div class="photo-frame-box">
+          <span class="photo-icon">👩</span>
+          <span class="photo-label">आईचा फोटो<br>(पासपोर्ट साईज)</span>
+        </div>
+        <div class="photo-frame-box">
+          <span class="photo-icon">👨</span>
+          <span class="photo-label">वडिलांचा फोटो<br>(पासपोर्ट साईज)</span>
+        </div>
+      </div>
+
+      <!-- Student Personal Information Box (Pushed right to bottom margin) -->
+      <div style="border: 1.5px solid #1b5e20; background: #ffffff; padding: 8px 10px; border-radius: 6px; margin-top: auto; margin-bottom: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+        <h4 style="margin: 0 0 6px 0; color: #1b5e20; text-align: center; border-bottom: 1px solid #1b5e20; padding-bottom: 3px; font-size: 13px;">विद्यार्थी वैयक्तिक माहिती</h4>
+        <table style="width: 100%; font-size: 11px; line-height: 1.5;">
+          <tr><td><strong>विद्यार्थ्याचे नाव:</strong></td><td><span class="handwritten-pen">${s.name}</span></td></tr>
+          <tr><td><strong>इयत्ता:</strong></td><td><span class="handwritten-pen">${s.cls || 'इयत्ता पहिली'}</span></td></tr>
+          <tr><td><strong>हजेरी क्रमांक:</strong></td><td><span class="handwritten-pen">${s.roll}</span></td></tr>
+          <tr><td><strong>दाखल क्रमांक (G.R.):</strong></td><td><span class="handwritten-pen">${s.gr || 'GR-101'}</span></td></tr>
+          <tr><td><strong>जन्मतारीख:</strong></td><td><span class="handwritten-pen">${s.dob || '-'}</span></td></tr>
+          <tr><td><strong>आईचे नाव:</strong></td><td><span class="handwritten-pen">${s.mother || '-'}</span></td></tr>
+          <tr><td><strong>वडिलांचे नाव:</strong></td><td><span class="handwritten-pen">${s.father || '-'}</span></td></tr>
+          <tr><td><strong>वर्गशिक्षक:</strong></td><td><span class="handwritten-pen">${teacher.name}</span> (शालार्थ ID: <span class="handwritten-pen">${teacher.shalarth}</span>)</td></tr>
+        </table>
+      </div>
+
+      <div style="text-align: center; font-size: 10px; color: #444; border-top: 1px solid #1b5e20; padding-top: 4px; margin-top: 2px;">
+        समग्र प्रगतिपत्रक (Holistic Progress Card) - राष्ट्रीय शिक्षण धोरण (NEP 2020) नुसार
+      </div>
+    </div>
+  `;
+  container.innerHTML += coverHtml;
+
+  // Calculate Attendance Sums
+  var att = s.att || {};
+  var t1_w = (att.w_jun||0) + (att.w_jul||0) + (att.w_aug||0) + (att.w_sep||0) + (att.w_oct||0);
+  var t1_p = (att.p_jun||0) + (att.p_jul||0) + (att.p_aug||0) + (att.p_sep||0) + (att.p_oct||0);
+  var t1_pct = t1_w > 0 ? Math.round((t1_p / t1_w) * 100) : 0;
+
+  var t2_w = (att.w_nov||0) + (att.w_jan||0) + (att.w_feb||0) + (att.w_mar||0) + (att.w_apr||0);
+  var t2_p = (att.p_nov||0) + (att.p_jan||0) + (att.p_feb||0) + (att.p_mar||0) + (att.p_apr||0);
+  var t2_pct = t2_w > 0 ? Math.round((t2_p / t2_w) * 100) : 0;
+
+  var ann_w = t1_w + t2_w;
+  var ann_p = t1_p + t2_p;
+  var ann_pct = ann_w > 0 ? Math.round((ann_p / ann_w) * 100) : 0;
+
+  // 2. PAGE 1 - PERSONAL & ATTENDANCE & HEALTH
+  var page1Html = `
+    <div class="a5-page cover-page">
+      <div class="header-box">
+        <h2>${schName}</h2>
+        <h3>पान १: वैयक्तिक माहिती, हजेरी व आरोग्य अहवाल</h3>
+      </div>
+
+      <table class="hpc-table">
+        <tr><th>विद्यार्थ्याचे नाव</th><td><span class="handwritten-pen">${s.name}</span></td><th>हजेरी क्र.</th><td><span class="handwritten-pen">${s.roll}</span></td></tr>
+        <tr><th>आईचे नाव</th><td><span class="handwritten-pen">${s.mother || '-'}</span></td><th>दाखल क्र.</th><td>${s.gr || '-'}</td></tr>
+        <tr><th>वर्गशिक्षक</th><td colspan="3"><span class="handwritten-pen">${teacher.name}</span> (${s.cls || 'इयत्ता पहिली'})</td></tr>
+      </table>
+
+      <div style="font-weight: bold; color: #1b5e20; margin: 6px 0 3px 0; font-size: 11px;">📊 हजेरी अहवाल (सत्रनिहाय व वार्षिक)</div>
+      <table class="hpc-table">
+        <tr><th>सत्र</th><th>कामकाजाचे एकूण दिवस</th><th>उपस्थित दिवस</th><th>उपस्थिती टक्केवारी (%)</th></tr>
+        <tr><td><strong>प्रथम सत्र (सत्र १)</strong></td><td>${t1_w}</td><td>${t1_p}</td><td><strong>${t1_pct}%</strong></td></tr>
+        <tr><td><strong>द्वितीय सत्र (सत्र २)</strong></td><td>${t2_w}</td><td>${t2_p}</td><td><strong>${t2_pct}%</strong></td></tr>
+        <tr style="background:#ffe0b2;"><td><strong>वार्षिक एकूण हजेरी</strong></td><td><strong>${ann_w}</strong></td><td><strong>${ann_p}</strong></td><td><strong>${ann_pct}%</strong></td></tr>
+      </table>
+
+      <div style="font-weight: bold; color: #1b5e20; margin: 6px 0 3px 0; font-size: 11px;">🩺 शारीरिक वाढ व आरोग्य अहवाल</div>
+      <table class="hpc-table">
+        <tr><th>बाब / माप</th><th>प्रथम सत्र (सत्र १)</th><th>द्वितीय सत्र (सत्र २)</th></tr>
+        <tr><td><strong>उंची (Height in cm)</strong></td><td><span class="handwritten-pen">${s.h1 || '-'} cm</span></td><td><span class="handwritten-pen">${s.h2 || '-'} cm</span></td></tr>
+        <tr><td><strong>वजन (Weight in kg)</strong></td><td><span class="handwritten-pen">${s.w1 || '-'} kg</span></td><td><span class="handwritten-pen">${s.w2 || '-'} kg</span></td></tr>
+      </table>
+
+      <div class="page-footer">पान १ | HPC समग्र प्रगतिपत्रक</div>
+    </div>
+  `;
+  container.innerHTML += page1Html;
+
+  // 3. PAGE 2 - ME & MY SURROUNDINGS & HOBBIES (WITH CARTOON STICKERS & ICONS)
+  function getCartoonBadge(type, val) {
+    var str = String(val || '').toLowerCase();
+    if(type === 'hobby') {
+      if(str.indexOf('चित्र') !== -1) return '🎨';
+      if(str.indexOf('गायन') !== -1 || str.indexOf('गाण') !== -1) return '🎤';
+      if(str.indexOf('नृत्य') !== -1 || str.indexOf('नाच') !== -1) return '💃';
+      if(str.indexOf('खेळ') !== -1 || str.indexOf('क्रीडा') !== -1) return '⚽';
+      if(str.indexOf('वाचन') !== -1) return '📚';
+      return '🎨';
+    }
+    if(type === 'color') {
+      if(str.indexOf('गुलाबी') !== -1) return '🌸';
+      if(str.indexOf('लाल') !== -1) return '🔴';
+      if(str.indexOf('निळा') !== -1) return '🔵';
+      if(str.indexOf('हिरवा') !== -1) return '🟢';
+      if(str.indexOf('पिवळा') !== -1) return '🟡';
+      if(str.indexOf('पांढरा') !== -1) return '⚪';
+      if(str.indexOf('जांभळा') !== -1) return '🟣';
+      return '🎨';
+    }
+    if(type === 'flower') {
+      if(str.indexOf('कमळ') !== -1) return '🪷';
+      if(str.indexOf('गुलाब') !== -1) return '🌹';
+      if(str.indexOf('चाफा') !== -1) return '🌼';
+      if(str.indexOf('सूर्यफूल') !== -1) return '🌻';
+      if(str.indexOf('मोगरा') !== -1 || str.indexOf('निशिगंध') !== -1) return '🌸';
+      return '🌺';
+    }
+    if(type === 'food') {
+      if(str.indexOf('पुरणपोळी') !== -1 || str.indexOf('पोळी') !== -1) return '🫓';
+      if(str.indexOf('पिझ्झा') !== -1) return '🍕';
+      if(str.indexOf('भाजी') !== -1) return '🥗';
+      if(str.indexOf('वरण') !== -1 || str.indexOf('भात') !== -1) return '🍚';
+      if(str.indexOf('चॉकलेट') !== -1) return '🍫';
+      if(str.indexOf('फळ') !== -1 || str.indexOf('सफरचंद') !== -1) return '🍎';
+      return '🍲';
+    }
+    if(type === 'sport') {
+      if(str.indexOf('लंगडी') !== -1 || str.indexOf('खो') !== -1 || str.indexOf('कबड्डी') !== -1) return '🏃‍♀️';
+      if(str.indexOf('क्रिकेट') !== -1) return '🏏';
+      if(str.indexOf('कॅरम') !== -1 || str.indexOf('बुद्धिबळ') !== -1) return '🎯';
+      if(str.indexOf('बॅडमिंटन') !== -1) return '🏸';
+      return '⚽';
+    }
+    if(type === 'animal') {
+      if(str.indexOf('मोर') !== -1) return '🦚';
+      if(str.indexOf('वाघ') !== -1) return '🐅';
+      if(str.indexOf('सिंह') !== -1) return '🦁';
+      if(str.indexOf('कुत्रा') !== -1) return '🐕';
+      if(str.indexOf('मांजर') !== -1) return '🐱';
+      if(str.indexOf('हत्ती') !== -1) return '🐘';
+      if(str.indexOf('ससा') !== -1) return '🐇';
+      return '🦁';
+    }
+    if(type === 'subject') {
+      if(str.indexOf('मराठी') !== -1) return '📖';
+      if(str.indexOf('गणित') !== -1) return '🔢';
+      if(str.indexOf('इंग्रजी') !== -1) return '🔤';
+      if(str.indexOf('चित्रकला') !== -1) return '🎨';
+      return '📚';
+    }
+    if(type === 'aim') {
+      if(str.indexOf('डॉक्टर') !== -1) return '🩺';
+      if(str.indexOf('शिक्षक') !== -1 || str.indexOf('शिक्षिका') !== -1) return '👩‍🏫';
+      if(str.indexOf('इंजिनिअर') !== -1 || str.indexOf('अभियंता') !== -1) return '🏗️';
+      if(str.indexOf('पोलीस') !== -1) return '👮‍♂️';
+      if(str.indexOf('वैमानिक') !== -1 || str.indexOf('पायलट') !== -1) return '✈️';
+      if(str.indexOf('चित्रकार') !== -1) return '🎨';
+      if(str.indexOf('खेळाडू') !== -1) return '🏆';
+      return '🌟';
+    }
+    return '⭐';
+  }
+
+  var hobbiesText = (s.hobbies || []).join(', ') || 'चित्रकला, खेळ';
+  var page2Html = `
+    <div class="a5-page soft-sky">
+      <div class="header-box">
+        <h2>${schName}</h2>
+        <h3>पान २: मी आणि माझा परिसर / आवडीनिवडी</h3>
+      </div>
+
+      <div style="text-align:center; font-size:12px; font-weight:bold; color:#1b5e20; margin-bottom:6px; background:#e8f5e9; padding:5px; border-radius:5px; border:1px solid #a5d6a7;">
+        🎨 माझी आवड-निवड व छंद (कार्टून चित्र स्टिकर्ससह) 🌟
+      </div>
+
+      <table class="hpc-table">
+        <tr>
+          <th style="width: 38%;">🎨 माझे आवडते छंद</th>
+          <td><span class="handwritten-pen">${hobbiesText}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('hobby', hobbiesText)}</span></td>
+        </tr>
+        <tr>
+          <th>🔴 माझा आवडता रंग</th>
+          <td><span class="handwritten-pen">${s.favColor || 'गुलाबी / निळा'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('color', s.favColor)}</span></td>
+        </tr>
+        <tr>
+          <th>🌺 माझे आवडते फूल</th>
+          <td><span class="handwritten-pen">${s.favFlower || 'कमळ / चाफा'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('flower', s.favFlower)}</span></td>
+        </tr>
+        <tr>
+          <th>🍱 माझे आवडते अन्न/खाद्य</th>
+          <td><span class="handwritten-pen">${s.favFood || 'पोळी-भाजी'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('food', s.favFood)}</span></td>
+        </tr>
+        <tr>
+          <th>⚽ माझा आवडता खेळ</th>
+          <td><span class="handwritten-pen">${s.favSport || 'क्रिकेट / लंगडी'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('sport', s.favSport)}</span></td>
+        </tr>
+        <tr>
+          <th>🦁 माझा आवडता प्राणी/पक्षी</th>
+          <td><span class="handwritten-pen">${s.favAnimal || 'मोर / वाघ'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('animal', s.favAnimal)}</span></td>
+        </tr>
+        <tr>
+          <th>📚 माझा आवडता विषय</th>
+          <td><span class="handwritten-pen">${s.favSubject || 'मराठी / गणित'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('subject', s.favSubject)}</span></td>
+        </tr>
+        <tr>
+          <th>🚀 माझे ध्येय (स्वप्न)</th>
+          <td><span class="handwritten-pen">${s.aim || 'शिक्षक / डॉक्टर'}</span> <span style="float:right; font-size:22px;">${getCartoonBadge('aim', s.aim)}</span></td>
+        </tr>
+        <tr>
+          <th>👭 माझे मित्र / मैत्रिणी</th>
+          <td><span class="handwritten-pen">${s.friends || 'सर्व वर्गमित्र'}</span> <span style="float:right; font-size:22px;">👫</span></td>
+        </tr>
+      </table>
+
+      <!-- Friends & Group Photo Frame Box on Page 2 -->
+      <div style="margin-top: 8px; padding: 6px; border: 1.5px dashed #1b5e20; background: #ffffff; border-radius: 6px; text-align: center;">
+        <div style="font-size: 10.5px; font-weight: bold; color: #1b5e20; margin-bottom: 4px;">
+          👭 / 👬 माझे आवडते मित्र / मैत्रिणी (फोटो फ्रेम)
+        </div>
+        <div class="photo-frame-container" style="justify-content: center; gap: 12px; margin: 3px 0;">
+          <div class="photo-frame-box" style="width: 42mm; height: 35mm;">
+            <span class="photo-icon">👬/👭</span>
+            <span class="photo-label">माझ्या मित्रांचे / मैत्रिणींचे फोटो<br>(पासपोर्ट साईज)</span>
+          </div>
+          <div class="photo-frame-box" style="width: 42mm; height: 35mm;">
+            <span class="photo-icon">📸 🌟</span>
+            <span class="photo-label">माझा आवडता ग्रुप फोटो<br>(पासपोर्ट साईज)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer">पान २ | HPC समग्र प्रगतिपत्रक</div>
+    </div>
+  `;
+  container.innerHTML += page2Html;
+
+  // 4. PAGES 3 TO 14 - 12 DOMAIN PAGES (WITH OUTCOMES & SINGLE ACTIVE LEVEL BOX)
+  domainsConfig.forEach(function(d) {
+    var a1Val = s.levels ? (s.levels[`${d.id}_a1`] || 'पर्वत') : 'पर्वत';
+    var a2Val = s.levels ? (s.levels[`${d.id}_a2`] || 'पर्वत') : 'पर्वत';
+    var a3Val = s.levels ? (s.levels[`${d.id}_a3`] || 'पर्वत') : 'पर्वत';
+
+    function getBoxContent(aspectTitle, activeLvl) {
+      var nBox = '<div class="unticked-box">☐ निर्झर / प्रवाह</div>';
+      var pBox = '<div class="unticked-box">☐ पर्वत</div>';
+      var aBox = '<div class="unticked-box">☐ आकाश</div>';
+
+      var remText = levelRemarks[activeLvl.indexOf('निर्झर')!==-1 ? 'nirjhar' : (activeLvl==='आकाश' ? 'aakash' : 'parvat')];
+
+      if(activeLvl.indexOf('निर्झर') !== -1) {
+        nBox = `<div class="active-level-box"><span class="tick-badge handwritten-pen">☑ [✔] प्राप्त स्तर (निर्झर)</span><br><span class="handwritten-pen">${remText}</span></div>`;
+      } else if(activeLvl === 'आकाश') {
+        aBox = `<div class="active-level-box"><span class="tick-badge handwritten-pen">☑ [✔] प्राप्त स्तर (आकाश)</span><br><span class="handwritten-pen">${remText}</span></div>`;
+      } else {
+        pBox = `<div class="active-level-box"><span class="tick-badge handwritten-pen">☑ [✔] प्राप्त स्तर (पर्वत)</span><br><span class="handwritten-pen">${remText}</span></div>`;
+      }
+
+      return `
+        <tr>
+          <td style="font-weight:bold; background:#fff3e0; width:22%;">${aspectTitle}</td>
+          <td class="level-col">${nBox}</td>
+          <td class="level-col">${pBox}</td>
+          <td class="level-col">${aBox}</td>
+        </tr>
+      `;
+    }
+
+    var isTerm1 = d.id.indexOf('_t1') !== -1;
+    var dData = (s.domainData && s.domainData[d.id]) ? s.domainData[d.id] : {};
+    var actVal = dData.act || d.act;
+    var selfVal = dData.self || (isTerm1 ? s.self1 : s.self2) || '-';
+    var peerVal = dData.peer || (isTerm1 ? s.peer1 : s.peer2) || '-';
+    var parentVal = dData.parent || (isTerm1 ? s.parent1 : s.parent2) || '-';
+    var teacherVal = dData.teacher || (isTerm1 ? s.teacher1 : s.teacher2) || '-';
+
+    var pageClass = (d.page === 3) ? "a5-page soft-sky" : "a5-page cover-page";
+    var domainHtml = `
+      <div class="${pageClass}">
+        <div class="header-box">
+          <h2>${schName}</h2>
+          <h3>पान ${d.page}: ${d.title}</h3>
+        </div>
+
+        <div class="outcomes-box">
+          <div class="outcomes-title">🎯 अभ्यासक्रमाची ध्येये व क्षमता (Curricular Goals & Competencies):</div>
+          <div style="white-space: pre-line;"><span class="goal-tick">☑ [✔]</span> ${d.cg.replace(/\n• /g, '\n☑ [✔] ')}</div>
+          <div style="white-space: pre-line; margin-top:3px; color:#1b5e20; font-weight:bold;"><span class="goal-tick">☑ [✔]</span> ${d.comp.replace(/\n• /g, '\n☑ [✔] ')}</div>
+          <div style="white-space: pre-line; margin-top:3px; color:#e65100;">${actVal}</div>
+        </div>
+
+        <table class="hpc-table">
+          <thead>
+            <tr>
+              <th>विकास पैलू</th>
+              <th>निर्झर / प्रवाह (Beginning)</th>
+              <th>पर्वत (Developing)</th>
+              <th>आकाश (Advanced)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${getBoxContent('१. जाणीव जागृती', a1Val)}
+            ${getBoxContent('२. संवेदनशीलता', a2Val)}
+            ${getBoxContent('३. सर्जनशीलता', a3Val)}
+          </tbody>
+        </table>
+
+        <!-- 360 DEGREE REFLECTION BOX ON EVERY DOMAIN PAGE -->
+        <div style="border: 1.5px solid #1b5e20; background: #ffffff; padding: 4px 6px; border-radius: 4px; margin-top: 3px; font-size: 10px;">
+          <div style="font-weight: bold; color: #1b5e20; border-bottom: 1px dashed #2e7d32; padding-bottom: 2px; margin-bottom: 3px;">
+            💬 ३६०° बहुआयामी अभिप्राय व मते (${isTerm1 ? 'प्रथम सत्र' : 'द्वितीय सत्र'}):
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 9.5px; line-height: 1.35;">
+            <tr>
+              <td style="width: 25%; font-weight: bold; color: #1b5e20; padding: 2px;">• स्वयं-मूल्यमापन:</td>
+              <td style="padding: 2px;"><span class="handwritten-pen">${selfVal}</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1b5e20; padding: 2px;">• वर्गमित्राचे/सहकाऱ्याचे मत:</td>
+              <td style="padding: 2px;"><span class="handwritten-pen">${peerVal}</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1b5e20; padding: 2px;">• पालकांचे मत:</td>
+              <td style="padding: 2px;"><span class="handwritten-pen">${parentVal}</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1b5e20; padding: 2px;">• शिक्षकाचा शेरा:</td>
+              <td style="padding: 2px;"><span class="handwritten-pen">${teacherVal}</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="page-footer">पान ${d.page} | HPC समग्र प्रगतिपत्रक</div>
+      </div>
+    `;
+    container.innerHTML += domainHtml;
+  });
+
+  // 5. PAGE 15 - 360 DEGREE REMARKS & FINAL EVALUATION & SIGNATURES
+  var page15Html = `
+    <div class="a5-page cover-page">
+      <div class="header-box">
+        <h2>${schName}</h2>
+        <h3>पान १५: ३६०° अभिप्राय, वार्षिक मूल्यांकन व स्वाक्षरी</h3>
+      </div>
+
+      <div style="font-weight: bold; color: #1b5e20; margin-bottom: 3px; font-size: 11px;">💬 ३६०° बहुआयामी अभिप्राय व मते</div>
+      <table class="hpc-table">
+        <tr><th style="width: 30%;">मूल्यांकन घटक</th><th>प्रथम सत्र (सत्र १)</th><th>द्वितीय सत्र (सत्र २)</th></tr>
+        <tr><td><strong>स्वयं-मूल्यमापन</strong></td><td><span class="handwritten-pen">${s.self1 || '-'}</span></td><td><span class="handwritten-pen">${s.self2 || '-'}</span></td></tr>
+        <tr><td><strong>वर्गमित्रांचे मत</strong></td><td><span class="handwritten-pen">${s.peer1 || '-'}</span></td><td><span class="handwritten-pen">${s.peer2 || '-'}</span></td></tr>
+        <tr><td><strong>पालकांचे मत</strong></td><td><span class="handwritten-pen">${s.parent1 || '-'}</span></td><td><span class="handwritten-pen">${s.parent2 || '-'}</span></td></tr>
+        <tr><td><strong>शिक्षकांचा शेरा</strong></td><td><span class="handwritten-pen">${s.teacher1 || '-'}</span></td><td><span class="handwritten-pen">${s.teacher2 || '-'}</span></td></tr>
+      </table>
+
+      <div style="border: 1.5px solid #1b5e20; background: #e8f5e9; padding: 8px; border-radius: 5px; margin: 8px 0;">
+        <h4 style="margin: 0 0 4px 0; color: #1b5e20;">📝 शिक्षकांचा अंतिम वार्षिक अभिप्राय:</h4>
+        <p style="margin: 0; font-size: 11px; line-height: 1.4;"><span class="handwritten-pen">${s.finalEval || 'विद्यार्थी प्रगतीपथावर आहे. मनःपूर्वक शुभेच्छा!'}</span></p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; text-align: center; margin-top: auto; padding-top: 15px; font-weight: bold; font-size: 11px;">
+        <div>
+          <br>__________________<br>पालकाची स्वाक्षरी
+        </div>
+        <div>
+          <br>__________________<br>वर्गशिक्षकाची स्वाक्षरी<br>(<span class="handwritten-pen">${teacher.name}</span>)
+        </div>
+        <div>
+          <br>__________________<br>मुख्याध्यापकाची स्वाक्षरी & शिक्का<br>(${schName})
+        </div>
+      </div>
+
+      <div class="page-footer">पान १५ | HPC समग्र प्रगतिपत्रक (अंतिम भाग)</div>
+    </div>
+  `;
+  container.innerHTML += page15Html;
+}
+
+
+function updateStudentSelectDropdown() {
+  if(activeSchoolUdise && registeredSchoolLimits[activeSchoolUdise]) {
+    activeSchoolLimit = registeredSchoolLimits[activeSchoolUdise];
+  }
+  var countBadge = document.getElementById('dbStudentCountBadge');
+  if(countBadge) {
+    var limit = activeSchoolLimit || 50;
+    countBadge.innerText = "📊 पट मर्यादा: " + students.length + " / " + limit + " विद्यार्थी";
+    if(students.length >= limit) {
+      countBadge.style.color = "#c62828";
+    } else {
+      countBadge.style.color = "#1b5e20";
+    }
+  }
+  var sel1 = document.getElementById('studentSelect');
+  var sel2 = document.getElementById('dbStudentSelect');
+  var sel3 = document.getElementById('reportStudentSelect');
+  
+  [sel1, sel2, sel3].forEach(function(sel) {
+    if(!sel) return;
+    sel.innerHTML = '';
+    for(var i = 0; i < students.length; i++) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.innerText = (i + 1) + " - " + students[i].name + " (" + (students[i].gender === 'girl' ? 'मुलगी' : 'मुलगा') + ")";
+      sel.appendChild(opt);
+    }
+    sel.value = currentIndex;
+  });
+
+  var delBtn = document.getElementById('dbDeleteBtn');
+  if(delBtn && students[currentIndex]) {
+    delBtn.innerText = "🗑️ '" + students[currentIndex].name + "' हटवा";
+  }
+}
+
+function onReportStudentChange() {
+  var sel = document.getElementById('reportStudentSelect');
+  if(sel) {
+    currentIndex = parseInt(sel.value) || 0;
+    var topSel = document.getElementById('studentSelect');
+    if(topSel) topSel.value = currentIndex;
+    var dbSel = document.getElementById('dbStudentSelect');
+    if(dbSel) dbSel.value = currentIndex;
+    loadStudentToForm();
+    renderAll16Pages();
+  }
+}
+
+function onDbStudentChange() {
+  var sel = document.getElementById('dbStudentSelect');
+  if(sel) {
+    currentIndex = parseInt(sel.value) || 0;
+    var topSel = document.getElementById('studentSelect');
+    if(topSel) topSel.value = currentIndex;
+    loadStudentToForm();
+    renderAll16Pages();
+    var delBtn = document.getElementById('dbDeleteBtn');
+    if(delBtn && students[currentIndex]) {
+      delBtn.innerText = "🗑️ '" + students[currentIndex].name + "' हटवा";
+    }
+  }
+}
+
+// DEMO LOCK & UNLOCK SYSTEM
+function promptAdminUnlock() {
+  var pin = prompt("🔐 मूळ मालक / ॲडमिन अनलॉक करण्यासाठी PIN टाका:\n(श्री. पांडुरंग संदीपान यादव - मोबाईल: 9422974772)");
+  if(pin === "Yadps#%1990" || pin === "yadps#%1990") {
+    isDemoLocked = false;
+    alert("🔓 ॲडमिन मोड यशस्वीपणे अनलॉक झाला!\nआता तुम्ही शाळेचे नाव, पत्ता व मंजूर पट पूर्णपणे बदलू शकता.");
+    var statusEl = document.getElementById('homeUdiseStatus');
+    if(statusEl) statusEl.innerHTML = "✅ <span style='color:#1b5e20;'>ॲडमिन मोड अनलॉक: तुम्ही कोणतीही शाळा बदलू शकता!</span>";
+  } else if(pin !== null) {
+    alert("❌ चुकीचा PIN! फक्त मूळ मालकांसाठी अनलॉक सोय उपलब्ध आहे.");
+  }
+}
+
+// OFFLINE SERVICE WORKER REGISTRATION
+if ('serviceWorker' in navigator) {
+  try {
+    var swBlobCode = "const CACHE_NAME='hpc-v42';self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>clients.claim());self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match('.')))));";
+    var blob = new Blob([swBlobCode], {type: 'application/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(function(e){});
+  } catch(e){}
+}
+
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var installBtn = document.getElementById('pwaInstallBtn');
+  if(installBtn) installBtn.style.display = 'inline-block';
+});
+
+function installPwaApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(choiceResult) {
+      if (choiceResult.outcome === 'accepted') {
+        alert('🎉 ॲप्लिकेशन यशस्वीपणे मोबाईल/PC वर इन्स्टॉल झाले! आता इंटरनेटशिवाय (Offline) पूर्णपणे वापरा.');
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    alert('📱 क्रोम ब्राउझरच्या मेनूमधून "Add to Home Screen" किंवा "Create Shortcut / Install" वर क्लिक करून ॲप सेव्ह करा. त्यानंतर इंटरनेटशिवाय चालवता येईल.');
+  }
+}
+
+</script>
+</body>
+</html>
